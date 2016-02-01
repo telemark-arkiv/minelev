@@ -1,0 +1,15 @@
+{
+  "studentName": "Hallgrim Durk",
+  "schoolId": "0987635467484",
+  "schoolName": "Birger Bønks videregående skole",
+  "type": "atferd",
+  "warningPeriod": "2. termin",
+  "behaviourCategories": [
+    "Eleven har uakseptabel munnbruk",
+    "Eleven forlater undervisning uten avklaring med lærer",
+    "Eleven har benyttet alkohol- eller rusmiddelbruk i skoletida"
+  ],
+  "studentId": "18117148321",
+  "userId": "gasg",
+  "userName": "Geir Gåsodden"
+}

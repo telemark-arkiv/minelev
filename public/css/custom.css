@@ -1,0 +1,86 @@
+.mdl-layout {
+    align-items: center;
+    justify-content: center;
+}
+
+.mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
+
+.mdl-layout__header {
+    background-color: #FFD520;
+}
+
+.mdl-card__media{
+    background-color: #6AC4AE;
+}
+
+.mdl-color--primary {
+    background-color: #FFD520 !important;
+}
+
+.mdl-button--accent {
+    background-color: #6AC4AE !important;
+}
+
+.mdl-button--colored {
+    background-color: #FFD520 !important;
+}
+
+.mdl-textfield__label:after {
+    background-color: #6AC4AE !important;
+}
+
+.docs-footer.mdl-mini-footer {
+    position: relative;
+    height: 90px;
+    margin-top: 15%;
+    bottom: 0;
+    padding: 24px;
+}
+
+.login-container {
+    padding: 24px;
+    flex: none;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-right-5 {
+    margin-left: 5px;
+}
+
+.previewUL {
+    list-style-type: none;
+}
+
+.modal {
+    overflow-x: visible;
+    overflow-y: visible;
+    position: absolute;
+}
+
+.modal__dialog {
+    width: 600px;
+}
+
+button[disabled=disabled], button:disabled {
+    background-color: #B2B2B2 !important;
+}
+
+.padding5 {
+    padding: 5px;
+}
+
+.hide-me {
+    display: none;
+    visibility: hidden;
+}
+
+.center {
+    max-width: 980px;
+}

@@ -1,0 +1,53 @@
+{{>search-students-box}}
+
+<div class="mdl-grid {{showMe students}}">
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <table class="mdl-cell--6-col mdl-cell--8-col-tablet">
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">list</i></td>
+            <td class="mdl-data-table__cell--non-numeric">Vis aktivitetslogg for eleven</td>
+        </tr>
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">note_add</i></td>
+            <td class="mdl-data-table__cell--non-numeric">Skriv varsel for eleven</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+</div>
+
+{{#each students}}
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col"></div>
+        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">{{fullName}}</h2>
+            </div>
+            <div class="mdl-card__media">
+                <img src="/public/images/student.jpeg" alt="{{fullName}}" width="111" height="167">
+            </div>
+            <div class="mdl-card__menu">
+                <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--black">
+                    <i class="material-icons">list</i>
+                </a>
+                <a href="/warning/{{personalIdNumber}}" title="Skriv varsel for {{fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--black">
+                    <i class="material-icons">note_add</i>
+                </a>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col"></div>
+    </div>
+{{/each}}
+
+<div class="mdl-grid {{hideMe students}}">
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Ingen elever funnet</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            Vennligst forsøk en annen søkestreng.<br/>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+</div>

@@ -1,0 +1,24 @@
+<div class="mdl-grid {{showMe logs}}">
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Elev</th>
+            <th class="mdl-data-table__cell--non-numeric">Type</th>
+            <th class="mdl-data-table__cell--non-numeric">Status</th>
+            <th class="mdl-data-table__cell--non-numeric">Dato</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each logs}}
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric">{{studentName}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{documentCategory}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatus documentStatus}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{formatDate timeStamp}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+</div>

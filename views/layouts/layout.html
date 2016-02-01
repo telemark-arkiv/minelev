@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{{systemName}} v{{version}} - {{versionName}}</title>
+<!-- Core CSS -->
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+<link rel="stylesheet" href="/public/css/material-modal.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+
+<!-- Custom CSS -->
+<link href="/public/css/custom.css" rel="stylesheet">
+
+<link rel="icon" type="image/x-icon" href="public/images/icons/favicon.ico" />
+<!-- Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=no' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title mdl-color-text--black">{{systemName}} v {{version}}</span>
+                <span class="mdl-color-text--black margin-left-20">{{credentials.data.cn}}</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/" title="Til forsiden"><i class="material-icons">home</i></a>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/help" title="Vis hjelpesiden"><i class="material-icons">help_outline</i></a>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/logs" title="Vis aktivitetslogg"><i class="material-icons">list</i></a>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/logout" title="Logg ut av {{systemName}}"><i class="material-icons">power_settings_new</i></a>
+                </nav>
+            </div>
+        </header>
+        <main class="mdl-layout mdl-js-layout mdl-layout__content">
+            {{{content}}}
+            {{>footer}}
+        </main>
+
+    </div>
+<!-- Modal JavaScript -->
+<script src="/public/js/material-modal.min.js"></script>
+</body>
+</html>

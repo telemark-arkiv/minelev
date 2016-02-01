@@ -1,0 +1,72 @@
+{
+  "name": "minelev",
+  "version": "1.0.0",
+  "description": "Admin interface for teachers",
+  "license": "MIT",
+  "author": {
+    "name": "Geir Gåsodden",
+    "email": "geir.gasodden@pythonia.no",
+    "url": "https://github.com/zrrrzzt"
+  },
+  "contributors": [
+    {
+      "name": "Jørgen Johansen",
+      "email": "post@jorgenjohansen.no",
+      "url": "https://jorgenjohansen.no"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.2.6"
+  },
+  "scripts": {
+    "start": "node standalone.js",
+    "test": "standard && tap --reporter=spec test/*.js",
+    "coverage": "tap test/*.js --coverage",
+    "coveralls": "tap --cov --coverage-report=lcov test/*.js && cat coverage/lcov.info | coveralls",
+    "setup": "npm install && node setup.js",
+    "generate-test-token": "node utils/generate-test-token.js"
+  },
+  "keywords": [
+    "Louie",
+    "Telemark fylkeskommune",
+    "Tfk",
+    "Digitalisering"
+  ],
+  "standard": {
+    "ignore": [
+      "public"
+    ]
+  },
+  "louie": {
+    "versionName": "The Kingsmen",
+    "versionVideoUrl": "https://www.youtube.com/watch?v=4V1p1dM3snQ",
+    "systemName": "MinElev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/telemark/minelev.git"
+  },
+  "bugs": {
+    "url": "http://github.com/telemark/minelev/issues"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "standard": "^5.4.1",
+    "tap": "^5.1.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "hapi": "^12.1.0",
+    "hapi-auth-cookie": "^5.0.0",
+    "hoek": "^3.0.4",
+    "inert": "^3.2.0",
+    "jsonwebtoken": "^5.5.4",
+    "ldapauth-fork": "^2.5.2",
+    "mongojs": "^2.3.0",
+    "path": "^0.12.7",
+    "vision": "^4.0.1",
+    "wreck": "^7.0.0",
+    "yar": "^6.0.0"
+  }
+}
