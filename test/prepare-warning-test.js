@@ -33,8 +33,8 @@ tap.test('It returns expected result from adferd single', function (test) {
 })
 
 tap.test('It returns expected result from karakter', function (test) {
-  var data = require('./data/karakter-post-data.json')
-  var expected = require('./data/karakter-prepared-data.json')
+  var data = require('./data/fag-post-data.json')
+  var expected = require('./data/fag-prepared-data.json')
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   delete result.timeStamp
@@ -43,8 +43,8 @@ tap.test('It returns expected result from karakter', function (test) {
 })
 
 tap.test('It returns expected result from karakter single', function (test) {
-  var data = require('./data/karakter-post-data-single.json')
-  var expected = require('./data/karakter-prepared-data-single.json')
+  var data = require('./data/fag-post-data-single.json')
+  var expected = require('./data/fag-prepared-data-single.json')
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   delete result.timeStamp
