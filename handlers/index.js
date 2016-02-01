@@ -182,8 +182,7 @@ function doSearch (request, reply) {
     credentials: request.auth.credentials,
     searchText: searchText
   }
-  // var searchUrl = config.BUDDY_API_URL + '/search/' + request.auth.credentials.data.userId + '/'
-  var searchUrl = config.BUDDY_API_URL
+  var searchUrl = config.BUDDY_API_URL + '/search/' + request.auth.credentials.data.userId + '/'
   wreckOptions.headers = {
     Authorization: request.auth.credentials.token
   }
