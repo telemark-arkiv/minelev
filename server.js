@@ -6,6 +6,7 @@ var server = new Hapi.Server()
 var config = require('./config')
 var louieService = require('./index')
 var validate = require('./lib/validateJWT')
+var validateAPI = require('./lib/validateAPI')
 var yarOptions = {
   storeBlank: false,
   cookieOptions: {
@@ -71,13 +72,25 @@ server.register(require('hapi-auth-cookie'), function (err) {
 
   server.auth.strategy('session', 'cookie', {
     password: config.COOKIE_SECRET,
-    cookie: 'louie-session',
+    cookie: 'minelev-session',
     validateFunc: validate,
     redirectTo: '/login',
     isSecure: false
   })
 
   server.auth.default('session')
+})
+
+server.register(require('hapi-auth-jwt2'), function (err) {
+  if (err) {
+    console.log(err)
+  }
+
+  server.auth.strategy('jwt', 'jwt',
+    { key: config.JWT_SECRET,          // Never Share your secret key
+      validateFunc: validateAPI,            // validate function defined above
+      verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
+    })
 })
 
 server.register({

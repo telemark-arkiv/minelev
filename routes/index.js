@@ -82,7 +82,7 @@ var routes = [
     config: {
       handler: api.getNextFromQueue,
       description: 'Get next job from queue',
-      auth: false
+      auth: 'jwt'
     }
   },
   {
@@ -91,7 +91,7 @@ var routes = [
     config: {
       handler: api.deleteFromQueue,
       description: 'Delete job from queue',
-      auth: false
+      auth: 'jwt'
     }
   },
   {
@@ -100,7 +100,7 @@ var routes = [
     config: {
       handler: api.addStatusToLog,
       description: 'Adds status to log',
-      auth: false
+      auth: 'jwt'
     }
   }
 ]
