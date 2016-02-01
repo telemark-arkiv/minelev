@@ -54,17 +54,6 @@ server.register(require('inert'), function (err) {
   })
 })
 
-server.register([
-  {
-    register: louieService,
-    options: {}
-  }
-], function (err) {
-  if (err) {
-    console.error('Failed to load a plugin:', err)
-  }
-})
-
 server.register(require('hapi-auth-cookie'), function (err) {
   if (err) {
     console.error('Failed to load a plugin: ', err)
@@ -98,6 +87,17 @@ server.register({
   options: yarOptions
 }, function (err) {
   console.error('Failed to load a plugin: yar ', err)
+})
+
+server.register([
+  {
+    register: louieService,
+    options: {}
+  }
+], function (err) {
+  if (err) {
+    console.error('Failed to load a plugin:', err)
+  }
 })
 
 function startServer () {

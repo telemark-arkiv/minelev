@@ -2,6 +2,7 @@
 
 function init () {
   var radios = document.querySelectorAll('.warning-type-selector')
+  var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   hideAllCheckboxes()
   hideAllHeaders()
@@ -24,8 +25,23 @@ function init () {
       validateWarning()
     })
   })
+  Array.prototype.forEach.call(periods, function(el) {
+    el.addEventListener('click', function (e) {
+      buildPreview()
+      validateWarning()
+    })
+  })
+  preselectFag()
+}
 
-
+function preselectFag () {
+  var radios = document.querySelectorAll('.warning-type-selector')
+  var arsakCourse = document.getElementById('courseChkboxCourse')
+  if (radios.length === 1) {
+    radios[0].checked = true
+    showMe(radios[0].value)
+    arsakCourse.checked = true
+  }
 }
 
 function showMe (type) {
