@@ -38,7 +38,7 @@ var students = [
     personalIdNumber: '220475148321',
     userName: 'heldu',
     unitId: 'SKIVS',
-    unitNavn: 'Birger Bønks videregående skole',
+    unitName: 'Birger Bønks videregående skole',
     orgId: '',
     groups: [
       {

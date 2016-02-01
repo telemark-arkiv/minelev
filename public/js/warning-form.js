@@ -151,21 +151,21 @@ function validateWarning () {
       if (type === 'orden' && /order/.test(el.id)) {
         checkboxCount ++
       }
-      if (type === 'karakter' && /course/.test(el.id)) {
+      if (type === 'fag' && /course/.test(el.id)) {
         checkboxCount ++
       }
     }
   })
 
-  if (type === 'karakter' && arsakCourse.checked) {
+  if (type === 'fag' && arsakCourse.checked) {
     reasonOK = true
   }
 
-  if (type === 'karakter' && checkboxCount > 1) {
+  if (type === 'fag' && checkboxCount > 1) {
     courseOK = true
   }
 
-  if (type !== 'karakter' && checkboxCount > 0) {
+  if (type !== 'fag' && checkboxCount > 0) {
     reasonOK = true
     courseOK = true
   }

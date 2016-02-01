@@ -1,12 +1,12 @@
-<div class="mdl-typography--headline warning-form-header chxBxkarakter">Velg fag varselet gjelder</div>
+<div class="mdl-typography--headline warning-form-header chxBxfag">Velg fag varselet gjelder</div>
 {{#each student.groups}}
-    <label for="courseChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxkarakter">
+    <label for="courseChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxfag">
         <input type="checkbox" name="coursesList" value="{{id}} - {{description}}" id="courseChkbox{{id}}" class="mdl-checkbox__input">
         <span class="mdl-checkbox__label">{{description}}</span>
     </label>
 {{/each}}
-<div class="mdl-typography--headline warning-form-header chxBxkarakter">Årsak til varsel</div>
-<label for="courseChkboxCourse" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxkarakter">
+<div class="mdl-typography--headline warning-form-header chxBxfag">Årsak til varsel</div>
+<label for="courseChkboxCourse" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxfag">
     <input type="checkbox" name="gradesCategories" value="Manglende vurderingsgrunnlag" id="courseChkboxCourse" class="mdl-checkbox__input">
     <span class="mdl-checkbox__label">Eleven har manglende vurderingsgrunnlag</span>
 </label>

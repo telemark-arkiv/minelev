@@ -19,7 +19,7 @@ var wreckOptions = {
 function filterWarningTypes (contactTeacher) {
   var filteredList = []
   warningTypes.forEach(function (type) {
-    if (type.id === 'karakter' || contactTeacher) {
+    if (type.id === 'fag' || contactTeacher) {
       filteredList.push(type)
     }
   })
