@@ -24,6 +24,11 @@ function init () {
   pwd.addEventListener('input', function (e) {
     isValid()
   })
+
+  setTimeout(function () {
+    usr.focus()
+  }, 500)
+
 }
 
 function ready (fn) {

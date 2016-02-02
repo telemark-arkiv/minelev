@@ -19,6 +19,10 @@ function init () {
     isValid()
   })
 
+  setTimeout(function () {
+    searchText.focus()
+  }, 500)
+
 }
 
 function ready (fn) {
