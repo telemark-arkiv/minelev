@@ -24,13 +24,11 @@
 {{#each students}}
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--3-col"></div>
-        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp height100">
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">{{fullName}}</h2>
             </div>
-            <div class="mdl-card__media">
-                <img src="/public/images/student.jpeg" alt="{{fullName}}" width="111" height="167">
-            </div>
+            <div class="mdl-card__media background-alternative padding20"></div>
             <div class="mdl-card__menu">
                 <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--black">
                     <i class="material-icons">list</i>

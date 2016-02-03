@@ -13,7 +13,7 @@
     background-color: #FFD520;
 }
 
-.mdl-card__media{
+.mdl-card__media {
     background-color: #6AC4AE;
 }
 
@@ -76,6 +76,10 @@ button[disabled=disabled], button:disabled {
     padding: 5px;
 }
 
+.padding20 {
+    padding: 20px;
+}
+
 .hide-me {
     display: none;
     visibility: hidden;
@@ -83,4 +87,9 @@ button[disabled=disabled], button:disabled {
 
 .center {
     max-width: 980px;
+}
+
+.height100 {
+    height: 100px;
+    min-height: 100px;
 }
