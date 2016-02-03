@@ -1,5 +1,4 @@
 'use strict'
-
 // For OpenLDAP:
 // searchFilter: process.env.LDAP_SEARCH_FILTER || '(uid={{username}})'
 // For Active Directory:
