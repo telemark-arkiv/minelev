@@ -7,6 +7,7 @@ webserver:
     DB_CONNECTION_LOG: mongodb://logserver/minelev
     DB_CONNECTION_QUE: mongodb://queserver/minelev
     # BUDDY_API_URL: https://api.buddy.com
+    # CALLBACK_STATUS_URL: https://api.buddy.com/status
     JWT_SECRET: "Louie Louie, oh no, I got to go"
     COOKIE_SECRET: "Louie Louie, oh no, I got to go"
     YAR_SECRET: "Louie Louie, oh no, I got to go"

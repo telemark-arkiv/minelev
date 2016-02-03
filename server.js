@@ -10,7 +10,7 @@ var validateAPI = require('./lib/validateAPI')
 var yarOptions = {
   storeBlank: false,
   cookieOptions: {
-    password: config.COOKIE_SECRET,
+    password: config.YAR_SECRET,
     isSecure: true
   }
 }
