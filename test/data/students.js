@@ -10,7 +10,7 @@ var students = [
     userName: 'haldu',
     unitId: 'SKIVS',
     unitName: 'Birger Bønks videregående skole',
-    orgId: '',
+    organizationNumber: 'NO974568098',
     groups: [
       {
         id: 'SKIVS:2SAA/151KRO1005',
@@ -39,7 +39,7 @@ var students = [
     userName: 'heldu',
     unitId: 'SKIVS',
     unitName: 'Birger Bønks videregående skole',
-    orgId: '',
+    organizationNumber: 'NO974568098',
     groups: [
       {
         id: 'SKIVS:2SAA/151KRO1005',
