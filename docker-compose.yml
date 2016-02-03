@@ -9,6 +9,7 @@ webserver:
     # BUDDY_API_URL: https://api.buddy.com
     JWT_SECRET: "Louie Louie, oh no, I got to go"
     COOKIE_SECRET: "Louie Louie, oh no, I got to go"
+    YAR_SECRET: "Louie Louie, oh no, I got to go"
     LDAP_URL: "ldap://ldap.forumsys.com:389"
     LDAP_BIND_DN: "cn=read-only-admin,dc=example,dc=com"
     LDAP_BIND_CREDENTIALS: "password"
