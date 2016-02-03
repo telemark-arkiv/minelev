@@ -182,7 +182,7 @@ function doSearch (request, reply) {
     credentials: request.auth.credentials,
     searchText: searchText
   }
-  var searchUrl = config.BUDDY_API_URL + '/search/' + request.auth.credentials.data.userId + '/'
+  var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/search/'
   wreckOptions.headers = {
     Authorization: request.auth.credentials.token
   }
@@ -220,19 +220,7 @@ function doSearch (request, reply) {
 */
 
 function writeWarning (request, reply) {
-  function filterStudents (studentID) {
-    var students = request.yar.get('searchResults') || []
-    var chosen
-    students.forEach(function (student) {
-      if (student.personalIdNumber === studentID) {
-        chosen = student
-      }
-    })
-    return chosen
-  }
-
   var studentID = request.params.studentID
-  var student = filterStudents(studentID)
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
@@ -243,9 +231,22 @@ function writeWarning (request, reply) {
     student: student,
     order: order,
     behaviour: behaviour,
-    warningTypes: filterWarningTypes(student.contactTeacher)
   }
-  reply.view('warning', viewOptions)
+  var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/students/'
+  wreckOptions.headers = {
+    Authorization: request.auth.credentials.token
+  }
+
+  Wreck.get(searchUrl + studentID, wreckOptions, function (error, res, payload) {
+    if (error) {
+      reply(error)
+    } else {
+      var student = payload[0]
+      viewOptions.student = student
+      viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
+      reply.view('warning', viewOptions)
+    }
+  })
 }
 
 function submitWarning (request, reply) {
