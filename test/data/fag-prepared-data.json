@@ -7,6 +7,7 @@
   "schoolName": "Birger Bønks videregående skole",
   "documentType": "varsel",
   "documentCategory": "fag",
+  "statusCallbackUrl":"https://api.buddy.com/status/",
   "gradesCategories": "Manglende vurderingsgrunnlag",
   "coursesList": "187284/8750 - Filmvitenskap for sangere\n187284/8770 - Produktbeskrivelser for boksfisk"
 }

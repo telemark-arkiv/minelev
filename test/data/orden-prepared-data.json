@@ -7,5 +7,6 @@
   "schoolName": "Birger Bønks videregående skole",
   "documentType": "varsel",
   "documentCategory": "orden",
+  "statusCallbackUrl":"https://api.buddy.com/status/",
   "orderCategories": "Eleven har ikke nødvendig skolemateriell klart til time\nEleven har manglende eller for sen innlevering av arbeid\nEleven er skyldig i annen uorden"
 }

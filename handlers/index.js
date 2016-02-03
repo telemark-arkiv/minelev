@@ -228,9 +228,8 @@ function writeWarning (request, reply) {
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
-    student: student,
     order: order,
-    behaviour: behaviour,
+    behaviour: behaviour
   }
   var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/students/'
   wreckOptions.headers = {

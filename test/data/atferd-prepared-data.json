@@ -7,5 +7,6 @@
   "schoolName": "Birger Bønks videregående skole",
   "documentType": "varsel",
   "documentCategory": "atferd",
+  "statusCallbackUrl":"https://api.buddy.com/status/",
   "behaviourCategories": "Eleven har uakseptabel munnbruk\nEleven forlater undervisning uten avklaring med lærer\nEleven har benyttet alkohol- eller rusmiddelbruk i skoletida"
 }
