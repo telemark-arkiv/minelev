@@ -178,7 +178,7 @@ function doSearch (request, reply) {
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository,
+    githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     searchText: searchText
   }
@@ -209,7 +209,7 @@ function doSearch (request, reply) {
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository,
+    githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     students: students,
     searchText: searchText
