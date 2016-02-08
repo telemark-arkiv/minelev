@@ -14,6 +14,14 @@ var yarOptions = {
     isSecure: true
   }
 }
+var goodOptions = {
+  opsInterval: 1000,
+  reporters: [{
+    reporter: require('good-console'),
+    events: { log: '*', response: '*' }
+  }]
+};
+
 
 server.connection({
   port: config.SERVER_PORT_WEB
@@ -88,6 +96,16 @@ server.register({
 }, function (err) {
   console.error('Failed to load a plugin: yar ', err)
 })
+
+server.register({
+  register: require('good'),
+  options: goodOptions
+}, function (err) {
+  if (err) {
+    console.error(err)
+  }
+})
+
 
 server.register([
   {
