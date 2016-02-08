@@ -20,8 +20,7 @@ var goodOptions = {
     reporter: require('good-console'),
     events: { log: '*', response: '*' }
   }]
-};
-
+}
 
 server.connection({
   port: config.SERVER_PORT_WEB
@@ -105,7 +104,6 @@ server.register({
     console.error(err)
   }
 })
-
 
 server.register([
   {
