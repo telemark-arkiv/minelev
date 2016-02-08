@@ -191,8 +191,21 @@ function doSearch (request, reply) {
     if (error) {
       reply(error)
     } else {
-      viewOptions.students = payload
-      reply.view('search-results', viewOptions)
+      if (res.statusCode === 200) {
+        viewOptions.students = payload
+        reply.view('search-results', viewOptions)
+      }
+      if (res.statusCode === 404) {
+        console.log(res.statusCode)
+        console.log(payload)
+        viewOptions.students = []
+        reply.view('search-results', viewOptions)
+      }
+      if (res.statusCode === 401) {
+        console.log(res.statusCode)
+        console.log(payload)
+        reply.redirect('/logout')
+      }
     }
   })
 }
@@ -238,10 +251,17 @@ function writeWarning (request, reply) {
     if (error) {
       reply(error)
     } else {
-      var student = payload[0]
-      viewOptions.student = student
-      viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
-      reply.view('warning', viewOptions)
+      if (res.statusCode === 200) {
+        var student = payload[0]
+        viewOptions.student = student
+        viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
+        reply.view('warning', viewOptions)
+      }
+      if (res.statusCode === 401) {
+        console.log(res.statusCode)
+        console.log(payload)
+        reply.redirect('/logout')
+      }
     }
   })
 }

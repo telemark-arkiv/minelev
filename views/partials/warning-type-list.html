@@ -1,11 +1,11 @@
-<div class="mdl-typography--headline padding5">Type varsel</div>
+<div class="mdl-typography--headline">Type varsel</div>
 {{#each warningTypes}}
     <label for="type-{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
         <input type="radio" name="type" value="{{id}}" id="type-{{id}}" class="mdl-radio__button warning-type-selector">
         <span class="mdl-radio__label">{{description}}</span>
     </label>
 {{/each}}
-<div class="mdl-typography--headline">Varselet gjelder</div>
+<div class="mdl-typography--headline margin-top-10">Varselet gjelder</div>
 <label for="terminRadioCourse1" class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
     <input type="radio" name="warningPeriod" value="1. termin" id="terminRadioCourse1" class="mdl-radio__button period-selector">
     <span class="mdl-radio__label">1. termin</span>
