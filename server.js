@@ -7,13 +7,6 @@ var config = require('./config')
 var louieService = require('./index')
 var validate = require('./lib/validateJWT')
 var validateAPI = require('./lib/validateAPI')
-var yarOptions = {
-  storeBlank: false,
-  cookieOptions: {
-    password: config.YAR_SECRET,
-    isSecure: true
-  }
-}
 var goodOptions = {
   opsInterval: 1000,
   reporters: [{
@@ -87,13 +80,6 @@ server.register(require('hapi-auth-jwt2'), function (err) {
       validateFunc: validateAPI,            // validate function defined above
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
     })
-})
-
-server.register({
-  register: require('yar'),
-  options: yarOptions
-}, function (err) {
-  console.error('Failed to load a plugin: yar ', err)
 })
 
 server.register({

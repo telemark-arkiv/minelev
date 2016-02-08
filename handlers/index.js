@@ -192,7 +192,6 @@ function doSearch (request, reply) {
       reply(error)
     } else {
       viewOptions.students = payload
-      request.yar.set('searchResults', payload)
       reply.view('search-results', viewOptions)
     }
   })
@@ -214,7 +213,6 @@ function doSearch (request, reply) {
     students: students,
     searchText: searchText
   }
- request.yar.set('searchResults', students)
  reply.view('search-results', viewOptions)
 }
 */
