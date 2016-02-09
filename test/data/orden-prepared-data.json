@@ -5,6 +5,7 @@
   "studentId": "18117148321",
   "schoolId": "0987635467484",
   "schoolName": "Birger Bønks videregående skole",
+  "period": "1. termin",
   "documentType": "varsel",
   "documentCategory": "orden",
   "statusCallbackUrl":"https://api.buddy.com/status/",
