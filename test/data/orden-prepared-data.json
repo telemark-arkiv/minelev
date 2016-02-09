@@ -8,6 +8,6 @@
   "period": "1. termin",
   "documentType": "varsel",
   "documentCategory": "orden",
-  "statusCallbackUrl":"https://api.buddy.com/status/",
+  "CALLBACK_STATUS_URL":"https://api.buddy.com/status/",
   "orderCategories": "Eleven har ikke nødvendig skolemateriell klart til time\nEleven har manglende eller for sen innlevering av arbeid\nEleven er skyldig i annen uorden"
 }

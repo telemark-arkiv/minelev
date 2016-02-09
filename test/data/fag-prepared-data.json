@@ -8,7 +8,7 @@
   "period": "Standpunktvurdering",
   "documentType": "varsel",
   "documentCategory": "fag",
-  "statusCallbackUrl":"https://api.buddy.com/status/",
+  "CALLBACK_STATUS_URL":"https://api.buddy.com/status/",
   "gradesCategories": "Manglende vurderingsgrunnlag",
   "coursesList": "187284/8750 - Filmvitenskap for sangere\n187284/8770 - Produktbeskrivelser for boksfisk"
 }

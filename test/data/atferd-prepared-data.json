@@ -8,6 +8,6 @@
   "period": "2. termin",
   "documentType": "varsel",
   "documentCategory": "atferd",
-  "statusCallbackUrl":"https://api.buddy.com/status/",
+  "CALLBACK_STATUS_URL":"https://api.buddy.com/status/",
   "behaviourCategories": "Eleven har uakseptabel munnbruk\nEleven forlater undervisning uten avklaring med lærer\nEleven har benyttet alkohol- eller rusmiddelbruk i skoletida"
 }
