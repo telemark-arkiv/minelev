@@ -27,6 +27,7 @@ var config = {
   DB_CONNECTION_QUEUE: process.env.DB_CONNECTION_QUEUE || 'mongodb://queueserver/louie',
   BUDDY_API_URL: process.env.BUDDY_API_URL || 'https://api.buddy.com',
   CALLBACK_STATUS_URL: process.env.CALLBACK_STATUS_URL || 'https://api.buddy.com/status/',
+  TEMPLATER_SERVICE_URL: process.env.TEMPLATER_SERVICE_URL || 'https://api.buddy.com/status/',
   JWT_SECRET: process.env.JWT_SECRET || 'Louie Louie, oh no, I got to go',
   COOKIE_SECRET: process.env.COOKIE_SECRET || 'Louie Louie, oh no, I got to go',
   LDAP: {

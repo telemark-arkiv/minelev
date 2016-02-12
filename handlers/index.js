@@ -1,8 +1,10 @@
 'use strict'
 
+var fs = require('fs')
 var mongojs = require('mongojs')
 var Wreck = require('wreck')
 var saksbehandling = require('tfk-saksbehandling-elev-varsel')
+var FormData = require('form-data')
 var config = require('../config')
 var dblog = mongojs(config.DB_CONNECTION_LOG)
 var dbqueue = mongojs(config.DB_CONNECTION_QUEUE)
@@ -309,12 +311,10 @@ function generateWarningPreview (request, reply) {
 
   templaterForm.append('file', fs.createReadStream(template))
 
-  templaterForm.submit(options.templaterServiceUrl, function (error, preview) {
+  templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, preview) {
     reply(error || preview)
   })
-
 }
-
 
 module.exports.getFrontpage = getFrontpage
 
@@ -333,3 +333,5 @@ module.exports.doSearch = doSearch
 module.exports.writeWarning = writeWarning
 
 module.exports.submitWarning = submitWarning
+
+module.exports.generateWarningPreview = generateWarningPreview
