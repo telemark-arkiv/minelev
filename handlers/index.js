@@ -2,6 +2,7 @@
 
 var mongojs = require('mongojs')
 var Wreck = require('wreck')
+var saksbehandling = require('tfk-saksbehandling-elev-varsel')
 var config = require('../config')
 var dblog = mongojs(config.DB_CONNECTION_LOG)
 var dbqueue = mongojs(config.DB_CONNECTION_QUEUE)
@@ -9,6 +10,7 @@ var logs = dblog.collection('logs')
 var queue = dbqueue.collection('queue')
 var pkg = require('../package.json')
 var prepareWarning = require('../lib/prepare-warning')
+var prepareWarningPreview = require('../lib/prepare-warning-preview')
 var order = require('../lib/categories-order')
 var behaviour = require('../lib/categories-behaviour')
 var warningTypes = require('../lib/categories-warnings')
@@ -289,6 +291,30 @@ function submitWarning (request, reply) {
     }
   })
 }
+
+function generateWarningPreview (request, reply) {
+  var user = request.auth.credentials.data
+  var data = request.payload
+  data.studentId = request.params.studentID
+  data.userId = user.userId
+  data.userName = user.cn
+  var postData = prepareWarning(data)
+  var previewData = prepareWarningPreview(postData)
+  var template = saksbehandling.getTemplatePath(postData.documentCategory)
+  var templaterForm = new FormData()
+
+  Object.keys(previewData).forEach(function (key) {
+    templaterForm.append(key, data[key])
+  })
+
+  templaterForm.append('file', fs.createReadStream(template))
+
+  templaterForm.submit(options.templaterServiceUrl, function (error, preview) {
+    reply(error || preview)
+  })
+
+}
+
 
 module.exports.getFrontpage = getFrontpage
 

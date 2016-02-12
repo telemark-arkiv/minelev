@@ -77,6 +77,14 @@ var routes = [
     }
   },
   {
+    method: 'POST',
+    path: '/warning/preview',
+    config: {
+      handler: handlers.generateWarningPreview,
+      description: 'Generates preview of letter'
+    }
+  },
+  {
     method: 'get',
     path: '/api/queue/next',
     config: {
