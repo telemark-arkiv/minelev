@@ -4,8 +4,8 @@
 #
 ###########################################################
 
-# Setting the base to nodejs 4.2.6
-FROM mhart/alpine-node:4.2.6
+# Setting the base to nodejs 4.3.0
+FROM mhart/alpine-node:4.3.0
 
 # Maintainer
 MAINTAINER Geir Gåsodden
