@@ -277,43 +277,38 @@ function submitWarning (request, reply) {
   data.userId = user.userId
   data.userName = user.cn
   var postData = prepareWarning(data)
-  queue.save(postData, function (error, doc) {
-    if (error) {
-      console.error(error)
-    } else {
-      postData.documentId = doc._id.toString()
-      postData.documentStatus = [
-        {
-          timeStamp: new Date().getTime(),
-          status: 'I kø'
-        }
-      ]
-      logs.save(postData)
-      reply.redirect('/')
-    }
-  })
-}
 
-function generateWarningPreview (request, reply) {
-  var user = request.auth.credentials.data
-  var data = request.payload
-  data.studentId = request.params.studentID
-  data.userId = user.userId
-  data.userName = user.cn
-  var postData = prepareWarning(data)
-  var previewData = prepareWarningPreview(postData)
-  var template = saksbehandling.getTemplatePath(postData.documentCategory)
-  var templaterForm = new FormData()
+  if (data.submitWarning) {
+    queue.save(postData, function (error, doc) {
+      if (error) {
+        console.error(error)
+      } else {
+        postData.documentId = doc._id.toString()
+        postData.documentStatus = [
+          {
+            timeStamp: new Date().getTime(),
+            status: 'I kø'
+          }
+        ]
+        logs.save(postData)
+        reply.redirect('/')
+      }
+    })
+  } else {
+    var previewData = prepareWarningPreview(postData)
+    var template = saksbehandling.getTemplatePath(postData.documentCategory)
+    var templaterForm = new FormData()
 
-  Object.keys(previewData).forEach(function (key) {
-    templaterForm.append(key, data[key])
-  })
+    Object.keys(previewData).forEach(function (key) {
+      templaterForm.append(key, previewData[key])
+    })
 
-  templaterForm.append('file', fs.createReadStream(template))
+    templaterForm.append('file', fs.createReadStream(template))
 
-  templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, preview) {
-    reply(error || preview)
-  })
+    templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, preview) {
+      reply(error || preview)
+    })
+  }
 }
 
 module.exports.getFrontpage = getFrontpage
@@ -333,5 +328,3 @@ module.exports.doSearch = doSearch
 module.exports.writeWarning = writeWarning
 
 module.exports.submitWarning = submitWarning
-
-module.exports.generateWarningPreview = generateWarningPreview
