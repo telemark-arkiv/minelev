@@ -3,7 +3,7 @@
 var fs = require('fs')
 var mongojs = require('mongojs')
 var Wreck = require('wreck')
-var saksbehandling = require('tfk-saksbehandling-elev-varsel')
+var getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
 var FormData = require('form-data')
 var config = require('../config')
 var dblog = mongojs(config.DB_CONNECTION_LOG)
@@ -296,7 +296,7 @@ function submitWarning (request, reply) {
     })
   } else {
     var previewData = prepareWarningPreview(postData)
-    var template = saksbehandling.getTemplatePath(postData.documentCategory)
+    var template = getWarningTemplatesPath(postData.documentCategory)
     var templaterForm = new FormData()
 
     Object.keys(previewData).forEach(function (key) {
