@@ -69,7 +69,6 @@
     "ldapauth-fork": "^2.5.2",
     "mongojs": "^2.3.0",
     "path": "^0.12.7",
-    "tfk-saksbehandling-elev-varsel": "^1.0.0",
     "vision": "^4.0.1",
     "wreck": "^7.0.0"
   }
