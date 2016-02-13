@@ -64,7 +64,8 @@ function hideAllHeaders () {
 }
 
 function validateWarning () {
-  var button = document.getElementById('submitWarning')
+  var submitButton = document.getElementById('submitWarning')
+  var previewButton = document.getElementById('previewWarning')
   var warningTypes = document.querySelectorAll('.warning-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
@@ -77,7 +78,8 @@ function validateWarning () {
   var reasonOK = false
 
   // Starts by disabling button
-  button.disabled = true
+  submitButton.disabled = true
+  previewButton.disabled = true
 
   Array.prototype.forEach.call(warningTypes, function(el) {
     if (el.checked) {
@@ -121,9 +123,9 @@ function validateWarning () {
 
   // If everything is OK let's go :-)
   if (typeOK && periodOK && courseOK && reasonOK) {
-    button.disabled = false
+    submitButton.disabled = false
+    previewButton.disabled = false
   }
-
 }
 
 function ready (fn) {

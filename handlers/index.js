@@ -186,6 +186,7 @@ function doSearch (request, reply) {
     credentials: request.auth.credentials,
     searchText: searchText
   }
+
   var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/search/'
   wreckOptions.headers = {
     Authorization: request.auth.credentials.token
@@ -246,6 +247,7 @@ function writeWarning (request, reply) {
     order: order,
     behaviour: behaviour
   }
+
   var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/students/'
   wreckOptions.headers = {
     Authorization: request.auth.credentials.token
