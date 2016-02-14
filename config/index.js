@@ -5,6 +5,8 @@
 // For Active Directory:
 // searchFilter: '(sAMAccountName={{username}})'
 
+var path = require('path')
+
 function ldapTlsSettings () {
   var fs = require('fs')
   var config = false
