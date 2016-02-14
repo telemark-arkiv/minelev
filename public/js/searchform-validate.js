@@ -21,6 +21,8 @@ function init () {
     isValid()
   })
 
+  isValid()
+
   setTimeout(function () {
     searchText.focus()
   }, 500)
