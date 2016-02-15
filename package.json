@@ -68,7 +68,7 @@
     "jsonwebtoken": "^5.5.4",
     "ldapauth-fork": "^2.5.2",
     "mongojs": "^2.3.0",
-    "tfk-saksbehandling-elev-varsel-templates": "^1.0.1",
+    "tfk-saksbehandling-elev-varsel-templates": "^1.0.2",
     "vision": "^4.0.1",
     "wreck": "^7.0.0"
   }
