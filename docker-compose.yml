@@ -25,12 +25,12 @@ webserver:
    - logserver
    - queueserver
 logserver:
-  image: mvertes/alpine-mongo
+  image: mongo:3.2.1
   environment:
     DB: louie
     COLLECTION: logs
 queueserver:
-  image: mvertes/alpine-mongo
+  image: mongo:3.2.1
   environment:
     DB: louie
     COLLECTION: queue
