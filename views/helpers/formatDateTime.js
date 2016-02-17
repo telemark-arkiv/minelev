@@ -15,7 +15,15 @@ var monthNames = {
   12: 'desember'
 }
 
+function zeroPadding (input) {
+  if (input.toString().length === 1) {
+    return '0' + input.toString()
+  } else {
+    return input
+  }
+}
+
 module.exports = function (datestring) {
   var date = new Date(datestring)
-  return date.getDate() + '. ' + monthNames[date.getMonth() + 1] + ' ' + date.getFullYear() + ' - ' + date.getHours() + ':' + date.getMinutes()
+  return date.getDate() + '. ' + monthNames[date.getMonth() + 1] + ' ' + date.getFullYear() + ' - ' + zeroPadding(date.getHours()) + ':' + zeroPadding(date.getMinutes())
 }

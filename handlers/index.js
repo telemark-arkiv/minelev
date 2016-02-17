@@ -268,8 +268,6 @@ function writeWarning (request, reply) {
         reply.view('warning', viewOptions)
       }
       if (res.statusCode === 401) {
-        console.log(res.statusCode)
-        console.log(payload)
         reply.redirect('/logout')
       }
     }
