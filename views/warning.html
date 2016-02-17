@@ -24,40 +24,14 @@
       {{>behaviour-categories-list}}
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a href="/" id="deleteWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett varsel"><i class="material-icons">delete</i></a>
+      <a href="/" id="deleteWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett varsel for {{student.fullName}}"><i class="material-icons">delete</i></a>
       <div class="mdl-layout-spacer"></div>
-      <button type="submit" value="1" id="previewWarning" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+      <button type="submit" value="1" id="previewWarning" title="Forhåndsvis varsel for {{student.fullName}}" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
       <span class="margin-right-5"></span>
-      <button type="submit" value="1" id="submitWarning" name="submitWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
+      <button type="submit" value="1" id="submitWarning" title="Send varsel til {{student.fullName}}" name="submitWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
     </div>
     </form>
   </div>
-  <div class="mdl-cell mdl-cell--3-col"></div>
-</div>
-
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--3-col"></div>
-  <table class="mdl-cell--6-col mdl-cell--8-col-tablet">
-    <tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">
-        <strong>Tegnforklaring</strong>
-      </td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">delete</i></td>
-      <td class="mdl-data-table__cell--non-numeric">Slette/forkaste varsel</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">description</i></td>
-      <td class="mdl-data-table__cell--non-numeric">Forhåndsvis varsel</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">mail_outline</i></td>
-      <td class="mdl-data-table__cell--non-numeric">Send varsel til distribusjon</td>
-    </tr>
-    </tbody>
-  </table>
   <div class="mdl-cell mdl-cell--3-col"></div>
 </div>
 
