@@ -268,6 +268,7 @@ function writeWarning (request, reply) {
         reply.view('warning', viewOptions)
       }
       if (res.statusCode === 401) {
+        console.log(JSON.stringify(payload))
         reply.redirect('/logout')
       }
     }
@@ -302,6 +303,8 @@ function submitWarning (request, reply) {
     var previewData = prepareWarningPreview(postData)
     var template = getWarningTemplatesPath(postData.documentCategory)
     var templaterForm = new FormData()
+
+    console.log(JSON.stringify(previewData))
 
     Object.keys(previewData).forEach(function (key) {
       templaterForm.append(key, previewData[key])
