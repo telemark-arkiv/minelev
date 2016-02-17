@@ -69,7 +69,11 @@ function getLogspage (request, reply) {
       credentials: request.auth.credentials,
       logs: data
     }
-    reply.view('logs', viewOptions)
+    if (request.query.studentId) {
+      reply.view('logs-detailed', viewOptions)
+    } else {
+      reply.view('logs', viewOptions)
+    }
   })
 }
 
