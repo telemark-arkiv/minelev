@@ -1,7 +1,7 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--3-col"></div>
   <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
-    <form action="/warning/{{student.personalIdNumber}}" method="post">
+    <form action="/warning/{{student.personalIdNumber}}" method="post" id="submitWarningForm">
       <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
       <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
       <input type="hidden" name="studentLastName" value="{{student.lastName}}">
@@ -26,7 +26,7 @@
     <div class="mdl-card__actions mdl-card--border">
       <a href="/" id="deleteWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett varsel for {{student.fullName}}"><i class="material-icons">delete</i></a>
       <div class="mdl-layout-spacer"></div>
-      <button type="submit" value="1" id="previewWarning" title="Forhåndsvis varsel for {{student.fullName}}" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+      <button type="submit" formaction="/warning/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewWarning" title="Forhåndsvis varsel for {{student.fullName}}" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
       <span class="margin-right-5"></span>
       <button type="submit" value="1" id="submitWarning" title="Send varsel til {{student.fullName}}" name="submitWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
     </div>
@@ -34,6 +34,8 @@
   </div>
   <div class="mdl-cell mdl-cell--3-col"></div>
 </div>
+
+<iframe sandbox="allow-same-origin allow-forms" name="previewFrame" id="previewFrame"></iframe>
 
 <!-- Helperscript for form -->
 <script src="/public/js/warning-form.js"></script>

@@ -276,6 +276,41 @@ function writeWarning (request, reply) {
   })
 }
 
+function generateWarningPreview (request, reply) {
+  var user = request.auth.credentials.data
+  var data = request.payload
+  data.studentId = request.params.studentID
+  data.userId = user.userId
+  data.userName = user.cn
+  var postData = prepareWarning(data)
+  var previewData = prepareWarningPreview(postData)
+  var template = getWarningTemplatesPath(postData.documentCategory)
+  var templaterForm = new FormData()
+  var pdfForm = new FormData()
+
+  Object.keys(previewData).forEach(function (key) {
+    templaterForm.append(key, previewData[key])
+  })
+
+  templaterForm.append('file', fs.createReadStream(template))
+
+  templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, docx) {
+    if (error) {
+      reply(error)
+    } else {
+      pdfForm.append('file', docx)
+      pdfForm.submit(config.PDF_SERVICE_URL, function (err, resp) {
+        if (resp.statusCode !== 200) {
+          console.error(new Error('Unexpected statusCode from pdfService: ' + resp.statusCode))
+        }
+        reply(err, resp)
+          .header('Content-disposition', 'attachment; filename=' + resp.headers.etag + '.pdf')
+          .header('Content-type', resp.headers['content-type'])
+      })
+    }
+  })
+}
+
 function submitWarning (request, reply) {
   var user = request.auth.credentials.data
   var data = request.payload
@@ -284,39 +319,21 @@ function submitWarning (request, reply) {
   data.userName = user.cn
   var postData = prepareWarning(data)
 
-  if (data.submitWarning) {
-    queue.save(postData, function (error, doc) {
-      if (error) {
-        console.error(error)
-      } else {
-        postData.documentId = doc._id.toString()
-        postData.documentStatus = [
-          {
-            timeStamp: new Date().getTime(),
-            status: 'I kø'
-          }
-        ]
-        logs.save(postData)
-        reply.redirect('/?documentAdded=' + postData.documentId)
-      }
-    })
-  } else {
-    var previewData = prepareWarningPreview(postData)
-    var template = getWarningTemplatesPath(postData.documentCategory)
-    var templaterForm = new FormData()
-
-    console.log(JSON.stringify(previewData))
-
-    Object.keys(previewData).forEach(function (key) {
-      templaterForm.append(key, previewData[key])
-    })
-
-    templaterForm.append('file', fs.createReadStream(template))
-
-    templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, preview) {
-      reply(error || preview)
-    })
-  }
+  queue.save(postData, function (error, doc) {
+    if (error) {
+      console.error(error)
+    } else {
+      postData.documentId = doc._id.toString()
+      postData.documentStatus = [
+        {
+          timeStamp: new Date().getTime(),
+          status: 'I kø'
+        }
+      ]
+      logs.save(postData)
+      reply.redirect('/?documentAdded=' + postData.documentId)
+    }
+  })
 }
 
 module.exports.getFrontpage = getFrontpage
@@ -334,5 +351,7 @@ module.exports.doLogout = doLogout
 module.exports.doSearch = doSearch
 
 module.exports.writeWarning = writeWarning
+
+module.exports.generateWarningPreview = generateWarningPreview
 
 module.exports.submitWarning = submitWarning

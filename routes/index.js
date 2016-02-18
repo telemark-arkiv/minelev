@@ -70,6 +70,14 @@ var routes = [
   },
   {
     method: 'POST',
+    path: '/warning/preview/{studentID}',
+    config: {
+      handler: handlers.generateWarningPreview,
+      description: 'Show warning preview for {studentID}'
+    }
+  },
+  {
+    method: 'POST',
     path: '/warning/{studentID}',
     config: {
       handler: handlers.submitWarning,

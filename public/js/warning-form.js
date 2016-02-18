@@ -4,6 +4,7 @@ function init () {
   var radios = document.querySelectorAll('.warning-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
+  var form = document.getElementById('submitWarningForm')
   hideAllCheckboxes()
   hideAllHeaders()
   validateWarning()
@@ -27,6 +28,9 @@ function init () {
     el.addEventListener('click', function (e) {
       validateWarning()
     })
+  })
+  form.addEventListener('submit', function (e) {
+    waitForPreview()
   })
   preselectFag()
 }
@@ -126,6 +130,17 @@ function validateWarning () {
     submitButton.disabled = false
     previewButton.disabled = false
   }
+}
+
+function waitForPreview () {
+  var previewButton = document.getElementById('previewWarning')
+  var previewFrame = document.getElementById('previewFrame')
+  previewButton.disabled = true
+  previewButton.textContent = 'cloud_download'
+  setTimeout(function () {
+    previewButton.textContent = 'description'
+    validateWarning()
+  }, 2000)
 }
 
 function ready (fn) {
