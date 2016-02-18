@@ -126,3 +126,8 @@ th.mdl-data-table__cell--non-numeric {
 a {
     color: #e30438;
 }
+
+.highlight-me {
+    font-weight: bold;
+    background-color: #6AC4AE;
+}

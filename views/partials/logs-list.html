@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         {{#each logs}}
-        <tr>
+        <tr id="{{documentId}}" class="{{highlightMe documentId ../latestId}}">
             <td class="mdl-data-table__cell--non-numeric">
                 <a href="/logs?studentId={{studentId}}" title="Vis aktivitetslogg for {{studentName}}" class="mdl-color-text--black">
                     <i class="material-icons">list</i>

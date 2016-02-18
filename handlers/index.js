@@ -42,6 +42,7 @@ function getFrontpage (request, reply) {
       systemName: pkg.louie.systemName,
       githubUrl: pkg.repository.url,
       credentials: request.auth.credentials,
+      latestId: request.query.documentAdded,
       logs: data || []
     }
     reply.view('index', viewOptions)
@@ -296,7 +297,7 @@ function submitWarning (request, reply) {
           }
         ]
         logs.save(postData)
-        reply.redirect('/')
+        reply.redirect('/?documentAdded=' + postData.documentId)
       }
     })
   } else {
