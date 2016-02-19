@@ -295,19 +295,9 @@ function generateWarningPreview (request, reply) {
   templaterForm.append('file', fs.createReadStream(template))
 
   templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, docx) {
-    if (error) {
-      reply(error)
-    } else {
-      pdfForm.append('file', docx)
-      pdfForm.submit(config.PDF_SERVICE_URL, function (err, resp) {
-        if (resp.statusCode !== 200) {
-          console.error(new Error('Unexpected statusCode from pdfService: ' + resp.statusCode))
-        }
-        reply(err, resp)
-          .header('Content-disposition', 'attachment; filename=' + resp.headers.etag + '.pdf')
-          .header('Content-type', resp.headers['content-type'])
-      })
-    }
+    reply(error || docx)
+      .header('Content-disposition', 'attachment; filename=' + docx.headers.etag + '.pdf')
+      .header('Content-type', docx.headers['content-type'])
   })
 }
 
