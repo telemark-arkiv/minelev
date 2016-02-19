@@ -124,10 +124,13 @@ th.mdl-data-table__cell--non-numeric {
 }
 
 a {
-    color: #e30438;
+    color: #007f7a;
+}
+
+a:visited {
+    color: #007c97;
 }
 
 .highlight-me {
-    font-weight: bold;
-    background-color: #6AC4AE;
+    background-color: #cceff4;
 }
