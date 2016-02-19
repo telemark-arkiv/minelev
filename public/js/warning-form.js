@@ -5,6 +5,7 @@ function init () {
   var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   var form = document.getElementById('submitWarningForm')
+  var submitButton = document.getElementById('submitWarning')
   hideAllCheckboxes()
   hideAllHeaders()
   validateWarning()
@@ -28,6 +29,9 @@ function init () {
     el.addEventListener('click', function (e) {
       validateWarning()
     })
+  })
+  submitButton.addEventListener('click', function (e) {
+    submitWarning(e)
   })
   form.addEventListener('submit', function (e) {
     waitForPreview()
@@ -134,13 +138,26 @@ function validateWarning () {
 
 function waitForPreview () {
   var previewButton = document.getElementById('previewWarning')
-  var previewFrame = document.getElementById('previewFrame')
+  var snackbarContainer = document.querySelector('.mdl-js-snackbar')
+  var data = {
+    message: 'Forhåndsvisning genereres nå. Vennligst vent...',
+    timeout: 2000
+  }
+
+  snackbarContainer.MaterialSnackbar.showSnackbar(data)
   previewButton.disabled = true
   previewButton.textContent = 'cloud_download'
   setTimeout(function () {
     previewButton.textContent = 'description'
     validateWarning()
-  }, 2000)
+  }, 3000)
+}
+
+function submitWarning (e) {
+  e.preventDefault()
+  var form = document.getElementById('submitWarningForm')
+  form.removeEventListener('submit')
+  form.submit()
 }
 
 function ready (fn) {
