@@ -286,7 +286,6 @@ function generateWarningPreview (request, reply) {
   var previewData = prepareWarningPreview(postData)
   var template = getWarningTemplatesPath(postData.documentCategory)
   var templaterForm = new FormData()
-  var pdfForm = new FormData()
 
   Object.keys(previewData).forEach(function (key) {
     templaterForm.append(key, previewData[key])
