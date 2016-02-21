@@ -158,6 +158,7 @@ function submitWarning (e) {
   var form = document.getElementById('submitWarningForm')
   form.removeEventListener('submit')
   form.submit()
+  return true
 }
 
 function ready (fn) {
