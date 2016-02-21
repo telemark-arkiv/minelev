@@ -156,8 +156,13 @@ function waitForPreview () {
 function submitWarning (e) {
   e.preventDefault()
   var form = document.getElementById('submitWarningForm')
-  form.removeEventListener('submit')
+
+  form.removeEventListener('submit', function(event) {
+    console.log('Listener removed')
+  })
+
   form.submit()
+
   return true
 }
 
