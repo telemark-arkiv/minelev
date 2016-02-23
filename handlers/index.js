@@ -294,9 +294,27 @@ function generateWarningPreview (request, reply) {
   templaterForm.append('file', fs.createReadStream(template))
 
   templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, docx) {
-    reply(error || docx)
-      .header('Content-disposition', 'attachment; filename=' + docx.headers.etag + '.pdf')
-      .header('Content-type', docx.headers['content-type'])
+    if (error) {
+      reply(error)
+    } else {
+      var chunks = []
+      var totallength = 0
+
+      docx.on('data', function (chunk) {
+        chunks.push(chunk)
+        totallength += chunk.length
+      })
+
+      docx.on('end', function () {
+        var results = new Buffer(totallength)
+        var pos = 0
+        for (var i = 0; i < chunks.length; i++) {
+          chunks[i].copy(results, pos)
+          pos += chunks[i].length
+        }
+        reply(results.toString('base64'))
+      })
+    }
   })
 }
 

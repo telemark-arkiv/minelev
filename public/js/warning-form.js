@@ -4,8 +4,10 @@ function init () {
   var radios = document.querySelectorAll('.warning-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
-  var form = document.getElementById('submitWarningForm')
-  var submitButton = document.getElementById('submitWarning')
+  var previewButton = document.getElementById('previewWarning')
+  var closePreviewButton = document.getElementById('closePreview')
+  var modalPreview = document.getElementById('modalPreview')
+  var warningCard = document.getElementById('warningCard')
   hideAllCheckboxes()
   hideAllHeaders()
   validateWarning()
@@ -30,12 +32,21 @@ function init () {
       validateWarning()
     })
   })
-  submitButton.addEventListener('click', function (e) {
-    submitWarning(e)
+
+  previewButton.addEventListener('click', function (e) {
+    previewWarning(e)
   })
-  form.addEventListener('submit', function (e) {
-    waitForPreview()
+
+  closePreviewButton.addEventListener('click', function (e) {
+    modalPreview.style.visibility = 'hidden'
+    warningCard.style.display = 'none'
+    modalPreview.style.opacity = 0
+    warningCard.style.visibility = 'visible'
+    warningCard.style.display = ''
+    warningCard.style.opacity = 1
+    location.hash='pageTop'
   })
+
   preselectFag()
 }
 
@@ -136,8 +147,29 @@ function validateWarning () {
   }
 }
 
-function waitForPreview () {
+var BASE64_MARKER = ';base64,';
+
+function convertDataURIToBinary(dataURI) {
+  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+  var base64 = dataURI.substring(base64Index);
+  var raw = window.atob(base64);
+  var rawLength = raw.length;
+  var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+  for(var i = 0; i < rawLength; i++) {
+    array[i] = raw.charCodeAt(i);
+  }
+  return array;
+}
+
+function previewWarning (e) {
+  e.preventDefault()
   var previewButton = document.getElementById('previewWarning')
+  var modalPreview = document.getElementById('modalPreview')
+  var warningCard = document.getElementById('warningCard')
+  var form = document.getElementById('submitWarningForm')
+  var previewContainer = document.getElementById('previewContainer')
+  var xhr = new XMLHttpRequest()
   var snackbarContainer = document.querySelector('.mdl-js-snackbar')
   var data = {
     message: 'Forhåndsvisning genereres nå. Vennligst vent...',
@@ -147,23 +179,61 @@ function waitForPreview () {
   snackbarContainer.MaterialSnackbar.showSnackbar(data)
   previewButton.disabled = true
   previewButton.textContent = 'cloud_download'
-  setTimeout(function () {
+
+  xhr.open('POST', previewButton.getAttribute('formaction'), true)
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+  xhr.onload = function() {
+    console.log(xhr)
+    if (xhr.status === 200) {
+      var pdfAsDataUri = "data:application/pdf;base64," + xhr.responseText
+      var pdfAsArray = convertDataURIToBinary(pdfAsDataUri)
+      previewContainer.innerHTML = ''
+      renderPDF(pdfAsArray, previewContainer)
+      modalPreview.style.visibility = 'visible'
+      modalPreview.style.display = ''
+      modalPreview.style.opacity = 1
+      warningCard.style.visibility = 'hidden'
+      warningCard.style.display = 'none'
+      warningCard.style.opacity = 0
+    }
+    else if (xhr.status !== 200) {
+      console.error(xhr.status)
+    }
     previewButton.textContent = 'description'
     validateWarning()
-  }, 3000)
+  }
+  xhr.send(serialize(form))
 }
 
-function submitWarning (e) {
-  e.preventDefault()
-  var form = document.getElementById('submitWarningForm')
+function renderPDF(data, canvasContainer, options) {
 
-  form.removeEventListener('submit', function(event) {
-    console.log('Listener removed')
-  })
+  var options = options || { scale: 1.5 };
 
-  form.submit()
+  function renderPage(page) {
+    var viewport = page.getViewport(options.scale);
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var renderContext = {
+      canvasContext: ctx,
+      viewport: viewport
+    };
 
-  return true
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    canvasContainer.appendChild(canvas);
+
+    page.render(renderContext);
+  }
+
+  function renderPages(pdfDoc) {
+    for(var num = 1; num <= pdfDoc.numPages; num++)
+      pdfDoc.getPage(num).then(renderPage);
+  }
+
+  PDFJS.disableWorker = true;
+  PDFJS.getDocument(data).then(renderPages);
+
 }
 
 function ready (fn) {

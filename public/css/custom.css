@@ -261,3 +261,11 @@ a:visited {
         transform: scale(1);
         opacity: 1;
         visibility: visible; } }
+
+/** MODAL **/
+
+#modalPreview {
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+}

@@ -1,6 +1,7 @@
+<a name="pageTop"></a>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--3-col"></div>
-  <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+  <div id ="warningCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
     <form action="/warning/{{student.personalIdNumber}}" method="post" id="submitWarningForm">
       <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
       <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
@@ -39,9 +40,20 @@
     <button class="mdl-snackbar__action"></button>
   </div>
   <div class="mdl-cell mdl-cell--3-col"></div>
+  <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <div id="previewContainer"></div>
+    <div class="mdl-card__actions mdl-card--border">
+      <div class="mdl-layout-spacer"></div>
+      <button id="closePreview" title="Lukk forhåndsvisning av varsel for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">close</button>
+    </div>
+  </div>
 </div>
 
-<iframe sandbox="allow-same-origin allow-forms" name="previewFrame" id="previewFrame"></iframe>
+<!-- serialize -->
+<script src="/public/js/serialize-0.2.js"></script>
+<!-- pdfviewer -->
+<script src="/public/js/pdf.js"></script>
+<script src="/public/js/pdf.worker.js"></script>
 <!-- snackbar -->
 <script src="/public/js/snackbar.js"></script>
 <!-- Helperscript for form -->
