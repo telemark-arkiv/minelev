@@ -232,7 +232,7 @@ function renderPDF(data, canvasContainer, options) {
       pdfDoc.getPage(num).then(renderPage);
   }
 
-  //PDFJS.disableWorker = true;
+  PDFJS.disableWorker = true;
   PDFJS.getDocument(data).then(renderPages);
 
 }
