@@ -54,11 +54,15 @@ function init () {
 function preselectFag () {
   var radios = document.querySelectorAll('.warning-type-selector')
   var arsakCourse = document.getElementById('courseChkboxCourse')
+  var courses = document.querySelectorAll('.chxBxfagInput')
   if (radios.length === 1) {
     radios[0].checked = true
     showMe(radios[0].value)
-    arsakCourse.checked = true
   }
+  if (courses.length === 1) {
+    courses[0].checked = true
+  }
+  arsakCourse.checked = true
 }
 
 function showMe (type) {
