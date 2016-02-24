@@ -4,8 +4,8 @@
 #
 ###########################################################
 
-# Setting the base to nodejs 4.3.0
-FROM mhart/alpine-node:4.3.0
+# Setting the base to nodejs 4.3.1
+FROM mhart/alpine-node:4.3.1
 
 # Maintainer
 MAINTAINER Geir Gåsodden
@@ -22,7 +22,7 @@ COPY . /src
 WORKDIR "/src"
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
 # Env variables
 ENV SERVER_PORT 3000
