@@ -269,3 +269,7 @@ a:visited {
     visibility: hidden;
     opacity: 0;
 }
+
+.warningColor {
+    color: #e30438
+}

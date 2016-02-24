@@ -45,6 +45,7 @@ function init () {
     warningCard.style.display = ''
     warningCard.style.opacity = 1
     location.hash='pageTop'
+    location.hash=''
   })
 
   preselectFag()
