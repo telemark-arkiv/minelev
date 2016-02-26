@@ -69,7 +69,7 @@
     "jsonwebtoken": "^5.5.4",
     "ldapauth-fork": "^2.5.2",
     "mongojs": "^2.3.0",
-    "tfk-saksbehandling-elev-varsel-templates": "^3.0.3",
+    "tfk-saksbehandling-elev-varsel-templates": "^4.0.0",
     "tfk-saksbehandling-schools-info": "^1.1.0",
     "vision": "^4.0.1",
     "wreck": "^7.0.0"
