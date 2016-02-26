@@ -5,7 +5,7 @@ function init () {
   var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   var previewButton = document.getElementById('previewWarning')
-  var closePreviewButton = document.getElementById('closePreview')
+  var closePreviewButtons = document.querySelectorAll('.closePreviewButton')
   var modalPreview = document.getElementById('modalPreview')
   var warningCard = document.getElementById('warningCard')
   hideAllCheckboxes()
@@ -37,15 +37,18 @@ function init () {
     previewWarning(e)
   })
 
-  closePreviewButton.addEventListener('click', function (e) {
-    modalPreview.style.visibility = 'hidden'
-    warningCard.style.display = 'none'
-    modalPreview.style.opacity = 0
-    warningCard.style.visibility = 'visible'
-    warningCard.style.display = ''
-    warningCard.style.opacity = 1
-    location.hash='pageTop'
-    location.hash=''
+
+  Array.prototype.forEach.call(closePreviewButtons, function(el) {
+    el.addEventListener('click', function (e) {
+      modalPreview.style.visibility = 'hidden'
+      warningCard.style.display = 'none'
+      modalPreview.style.opacity = 0
+      warningCard.style.visibility = 'visible'
+      warningCard.style.display = ''
+      warningCard.style.opacity = 1
+      location.hash='pageTop'
+      location.hash=''
+    })
   })
 
   preselectFag()
@@ -225,9 +228,33 @@ function renderPDF(data, canvasContainer, options) {
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
+    var wmCanvas=document.createElement("canvas");
+    wmCanvas.id="watermark";
+    wmCanvas.height=viewport.height;
+    wmCanvas.width=viewport.width;
+
+    canvasContainer.appendChild(wmCanvas);
     canvasContainer.appendChild(canvas);
 
+    var wmContext=wmCanvas.getContext('2d');
+    wmContext.globalAlpha=0.2;
+    // setup text for filling
+    wmContext.font = "72px Arial" ;
+    wmContext.fillStyle = "red";
+    // get the metrics with font settings
+    var metrics = wmContext.measureText("F o r h å n d s v i s n i n g");
+    var width = metrics.width;
+    // height is font size
+    var height = 72;
+    // change the origin coordinate to the middle of the context
+    wmContext.translate(viewport.width/2, viewport.height/2);
+    // rotate the context (so it's rotated around its center)
+    wmContext.rotate(-Math.atan(viewport.height/viewport.width));
+    // as the origin is now at the center, just need to center the text
+    wmContext.fillText("F o r h å n d s v i s n i n g",-width/2,height/2);
+
     page.render(renderContext);
+
   }
 
   function renderPages(pdfDoc) {

@@ -273,3 +273,12 @@ a:visited {
 .warningColor {
     color: #e30438
 }
+
+#watermark {
+    position: absolute;
+    z-index: 2000;
+}
+
+.mdl-card--border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
