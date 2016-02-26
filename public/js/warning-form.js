@@ -188,7 +188,6 @@ function previewWarning (e) {
   xhr.open('POST', previewButton.getAttribute('formaction'), true)
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
   xhr.onload = function() {
-    console.log(xhr)
     if (xhr.status === 200) {
       var pdfAsDataUri = "data:application/pdf;base64," + xhr.responseText
       var pdfAsArray = convertDataURIToBinary(pdfAsDataUri)
