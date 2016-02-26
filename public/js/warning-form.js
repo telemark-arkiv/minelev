@@ -241,7 +241,7 @@ function renderPDF(data, canvasContainer, options) {
     wmContext.globalAlpha=0.2;
     // setup text for filling
     wmContext.font = "72px Arial" ;
-    wmContext.fillStyle = "red";
+    wmContext.fillStyle = "#e30438";
     // get the metrics with font settings
     var metrics = wmContext.measureText("F o r h å n d s v i s n i n g");
     var width = metrics.width;
