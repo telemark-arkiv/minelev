@@ -213,6 +213,7 @@ function previewWarning (e) {
 }
 
 function renderPDF(data, canvasContainer, options) {
+  // Watermark inspired by http://jsfiddle.net/EAXc9/7/
 
   var options = options || { scale: 1.5 };
 
