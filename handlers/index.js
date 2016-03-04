@@ -101,7 +101,6 @@ function showLogin (request, reply) {
   reply.view('login', viewOptions, {layout: 'layout-login'})
 }
 
-/*
 function doLogin (request, reply) {
   var jwt = require('jsonwebtoken')
   var payload = request.payload
@@ -148,8 +147,8 @@ function doLogin (request, reply) {
     }
   })
 }
-*/
 
+/*
 // For local testing
 function doLogin (request, reply) {
   var jwt = require('jsonwebtoken')
@@ -173,6 +172,7 @@ function doLogin (request, reply) {
 
   reply.redirect('/')
 }
+*/
 
 function doLogout (request, reply) {
   request.cookieAuth.clear()
