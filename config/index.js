@@ -32,6 +32,9 @@ var config = {
   TEMPLATER_SERVICE_URL: process.env.TEMPLATER_SERVICE_URL || 'https://api.buddy.com/status/',
   JWT_SECRET: process.env.JWT_SECRET || 'Louie Louie, oh no, I got to go',
   COOKIE_SECRET: process.env.COOKIE_SECRET || 'Louie Louie, oh no, I got to go',
+  GITHUB_FEEDBACK_URL: process.env.GITHUB_FEEDBACK_URL || 'https://api.github.com/repos/:user/:repo/issues',
+  GITHUB_USER: process.env.GITHUB_USER || 'yourgithubuser',
+  GITHUB_TOKEN: process.env.GITHUB_TOKEN || 'yourgithubtoken',
   LDAP: {
     url: process.env.LDAP_URL || 'ldap://ldap.forumsys.com:389',
     bindDn: process.env.LDAP_BIND_DN || 'cn=read-only-admin,dc=example,dc=com',

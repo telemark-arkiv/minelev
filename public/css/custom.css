@@ -282,3 +282,7 @@ a:visited {
 .mdl-card--border-bottom {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.fullWidth {
+    width: 100%;
+}

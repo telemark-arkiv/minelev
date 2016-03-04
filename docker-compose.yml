@@ -11,6 +11,9 @@ webserver:
     # TEMPLATER_SERVICE_URL: https://pdftemplater.service.example.com
     JWT_SECRET: "Louie Louie, oh no, I got to go"
     COOKIE_SECRET: "Louie Louie, oh no, I got to go"
+    GITHUB_FEEDBACK_URL: "https://api.github.com/repos/:user/:repo/issues"
+    GITHUB_USER: "yourgithubuser"
+    GITHUB_TOKEN: "yourgithubtoken"
     LDAP_URL: "ldap://ldap.forumsys.com:389"
     LDAP_BIND_DN: "cn=read-only-admin,dc=example,dc=com"
     LDAP_BIND_CREDENTIALS: "password"
