@@ -1,6 +1,6 @@
 {
   "name": "minelev",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Admin interface for teachers",
   "license": "MIT",
   "author": {
@@ -17,7 +17,7 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=4.3.1"
+    "node": ">=4.4.0"
   },
   "scripts": {
     "start": "node standalone.js",
