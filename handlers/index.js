@@ -112,14 +112,14 @@ function doLogin (request, reply) {
   auth.authenticate(username, password, function (err, user) {
     if (err) {
       console.error(JSON.stringify(err))
-      if (err.name) {
+      if (err.name || /no such user/.test(err)) {
         var viewOptions = {
           version: pkg.version,
           versionName: pkg.louie.versionName,
           versionVideoUrl: pkg.louie.versionVideoUrl,
           systemName: pkg.louie.systemName,
           githubUrl: pkg.repository.url,
-          loginErrorMessage: err.name
+          loginErrorMessage: err.name || 'InvalidCredentialsError'
         }
         reply.view('login', viewOptions, {layout: 'layout-login'})
       }
