@@ -8,10 +8,10 @@ var louieService = require('./index')
 var validate = require('./lib/validateJWT')
 var validateAPI = require('./lib/validateAPI')
 var goodOptions = {
-  opsInterval: 1000,
+  opsInterval: 900000,
   reporters: [{
     reporter: require('good-console'),
-    events: { log: '*', response: '*' }
+    events: { log: '*', ops: '*', error: '*' }
   }]
 }
 

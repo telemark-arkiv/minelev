@@ -32,6 +32,13 @@ function getStatsHours (request, reply) {
     })
 }
 
+function getStatsCategory (request, reply) {
+  logs.aggregate({'$group': {'_id': '$documentCategory', 'total': {'$sum': 1}}})
+    .sort({'total': -1}, function (error, data) {
+      reply(error || data)
+    })
+}
+
 module.exports.getStatsSchools = getStatsSchools
 
 module.exports.getStatsTotal = getStatsTotal
@@ -39,3 +46,5 @@ module.exports.getStatsTotal = getStatsTotal
 module.exports.getStatsStatus = getStatsStatus
 
 module.exports.getStatsHours = getStatsHours
+
+module.exports.getStatsCategory = getStatsCategory

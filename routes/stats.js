@@ -34,6 +34,14 @@ var routes = [
       handler: stats.getStatsHours,
       description: 'Statistics for warnings per hour of the day'
     }
+  },
+  {
+    method: 'GET',
+    path: '/stats/category',
+    config: {
+      handler: stats.getStatsCategory,
+      description: 'Statistics for warnings per category'
+    }
   }
 ]
 
