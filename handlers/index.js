@@ -130,7 +130,7 @@ function doLogin (request, reply) {
       }
       var data = {
         cn: user.cn,
-        userId: user.sAMAccountName || ''
+        userId: user.sAMAccountName || user.uid || ''
       }
       var token = jwt.sign(data, config.JWT_SECRET, tokenOptions)
       request.cookieAuth.set({
