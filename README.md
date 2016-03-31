@@ -3,7 +3,7 @@
 # minelev
 Administrasjonsgrensesnitt for lærere i den videregående skolen.
 
-Versjon 1.0.0 skal settes i produksjon uke 9 2016.
+Versjon 1.0.0 ble lansert 29. februar 2016.
 
 ## Docker
 
