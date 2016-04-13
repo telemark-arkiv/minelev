@@ -18,6 +18,12 @@ function getStatsTotal (request, reply) {
   })
 }
 
+function getStatsTeachers (request, reply) {
+  logs.distinct('userId', {}, function (error, data) {
+    reply(error || data.length)
+  })
+}
+
 function getStatsStatus (request, reply) {
   logs.aggregate({'$unwind': '$documentStatus'}, {'$group': {'_id': '$documentStatus.status', 'total': {'$sum': 1}}})
     .sort({'total': -1}, function (error, data) {
@@ -42,6 +48,8 @@ function getStatsCategory (request, reply) {
 module.exports.getStatsSchools = getStatsSchools
 
 module.exports.getStatsTotal = getStatsTotal
+
+module.exports.getStatsTeachers = getStatsTeachers
 
 module.exports.getStatsStatus = getStatsStatus
 

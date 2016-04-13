@@ -21,6 +21,14 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/stats/teachers',
+    config: {
+      handler: stats.getStatsTeachers,
+      description: 'Statistics for unique teachers'
+    }
+  },
+  {
+    method: 'GET',
     path: '/stats/status',
     config: {
       handler: stats.getStatsStatus,
