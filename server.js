@@ -1,18 +1,25 @@
 'use strict'
 
-var Hapi = require('hapi')
-var Hoek = require('hoek')
-var server = new Hapi.Server()
-var config = require('./config')
-var louieService = require('./index')
-var validate = require('./lib/validateJWT')
-var validateAPI = require('./lib/validateAPI')
-var goodOptions = {
-  opsInterval: 900000,
-  reporters: [{
-    reporter: require('good-console'),
-    events: { log: '*', ops: '*', error: '*' }
-  }]
+const Hapi = require('hapi')
+const Hoek = require('hoek')
+const server = new Hapi.Server()
+const config = require('./config')
+const louieService = require('./index')
+const validate = require('./lib/validateJWT')
+const validateAPI = require('./lib/validateAPI')
+const goodOptions = {
+  ops: {
+    interval: 900000
+  },
+  reporters: {
+    console: [{
+      module: 'good-squeeze',
+      name: 'Squeeze',
+      args: [{ log: '*', ops: '*', error: '*' }]
+    }, {
+      module: 'good-console'
+    }, 'stdout']
+  }
 }
 
 server.connection({
