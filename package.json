@@ -66,7 +66,7 @@
     "hapi-auth-jwt2": "^5.4.1",
     "hoek": "^4.0.0",
     "inert": "^3.2.0",
-    "jsonwebtoken": "^5.5.4",
+    "jsonwebtoken": "^6.1.0",
     "ldapauth-fork": "^2.5.2",
     "mongojs": "^2.3.0",
     "tfk-saksbehandling-elev-varsel-templates": "^4.0.1",
