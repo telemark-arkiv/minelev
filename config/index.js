@@ -1,10 +1,13 @@
 'use strict'
+
 // For OpenLDAP:
 // searchFilter: process.env.LDAP_SEARCH_FILTER || '(uid={{username}})'
 // For Active Directory:
 // searchFilter: '(sAMAccountName={{username}})'
 
 var path = require('path')
+
+const SERVER_PORT_WEB = process.env.SERVER_PORT_WEB || 8000
 
 function ldapTlsSettings () {
   var fs = require('fs')
@@ -23,11 +26,11 @@ function ldapTlsSettings () {
 }
 
 var config = {
-  SERVER_PORT_WEB: process.env.SERVER_PORT_WEB || 8000,
+  SERVER_PORT_WEB: SERVER_PORT_WEB,
   SERVER_PORT_API: process.env.SERVER_PORT_API || 3000,
   DB_CONNECTION_LOG: process.env.DB_CONNECTION_LOG || 'mongodb://localhost/louie',
   DB_CONNECTION_QUEUE: process.env.DB_CONNECTION_QUEUE || 'mongodb://localhost/louie',
-  BUDDY_API_URL: process.env.BUDDY_API_URL || 'https://api.buddy.com',
+  BUDDY_API_URL: process.env.BUDDY_API_URL || 'http://localhost:' + SERVER_PORT_WEB + '/demo',
   CALLBACK_STATUS_URL: process.env.CALLBACK_STATUS_URL || 'https://api.buddy.com/status/',
   TEMPLATER_SERVICE_URL: process.env.TEMPLATER_SERVICE_URL || 'https://api.buddy.com/status/',
   JWT_SECRET: process.env.JWT_SECRET || 'Louie Louie, oh no, I got to go',
