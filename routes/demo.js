@@ -11,6 +11,15 @@ const routes = [
       description: 'Demoversion of the buddysearch',
       auth: false
     }
+  },
+  {
+    method: 'GET',
+    path: '/demo/users/{userId}/students/{studentId}',
+    config: {
+      handler: handlers.doDemoSearch,
+      description: 'Demoversion of the buddysearch',
+      auth: false
+    }
   }
 ]
 

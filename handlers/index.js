@@ -221,26 +221,6 @@ function doSearch (request, reply) {
   })
 }
 
-/*
-// For local testing
-function doSearch (request, reply) {
-  var students = require('../test/data/students')
-  var data = request.payload
-  var searchText = data.searchText
-  var viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    students: students,
-    searchText: searchText
-  }
- reply.view('search-results', viewOptions)
-}
-*/
-
 function writeWarning (request, reply) {
   var studentID = request.params.studentID
   var viewOptions = {
