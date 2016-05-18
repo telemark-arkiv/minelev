@@ -4,8 +4,8 @@
 #
 ###########################################################
 
-# Setting the base to nodejs 4.4.2
-FROM mhart/alpine-node:4.4.2
+# Setting the base to nodejs 4.4.4
+FROM mhart/alpine-node:4.4.4
 
 # Maintainer
 MAINTAINER Geir Gåsodden
@@ -13,7 +13,10 @@ MAINTAINER Geir Gåsodden
 #### Begin setup ####
 
 # Installs git
-RUN apk add --update git && rm -rf /var/cache/apk/*
+RUN apk add --update --no-cache git
+
+# Extra tools for native dependencies
+RUN apk add --no-cache make gcc g++ python
 
 # Bundle app source
 COPY . /src
