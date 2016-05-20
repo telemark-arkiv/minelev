@@ -5,7 +5,7 @@ webserver:
     SERVER_PORT_WEB: 80
     SERVER_PORT_API: 3000
     DB_CONNECTION_LOG: mongodb://logserver/minelev
-    DB_CONNECTION_QUE: mongodb://queserver/minelev
+    DB_CONNECTION_QUEUE: mongodb://queserver/minelev
     # BUDDY_API_URL: https://api.buddy.com
     # CALLBACK_STATUS_URL: https://api.buddy.com/status
     # TEMPLATER_SERVICE_URL: https://pdftemplater.service.example.com
