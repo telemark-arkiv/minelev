@@ -9,3 +9,6 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+after_success:
+  - npm run coveralls
+  - curl --data build=true -X POST https://registry.hub.docker.com/u/telemark/skoleskyss.t-fk.no/trigger/d58dda3d-7739-4dfe-abed-a7f56dfec50f/
