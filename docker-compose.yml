@@ -5,12 +5,12 @@ webserver:
     SERVER_PORT_WEB: 80
     SERVER_PORT_API: 3000
     DB_CONNECTION_LOG: mongodb://logserver/minelev
-    DB_CONNECTION_QUE: mongodb://queserver/minelev
+    DB_CONNECTION_QUEUE: mongodb://queueserver/minelev
     # BUDDY_API_URL: https://api.buddy.com
     # CALLBACK_STATUS_URL: https://api.buddy.com/status
     # TEMPLATER_SERVICE_URL: https://pdftemplater.service.example.com
-    JWT_SECRET: "Louie Louie, oh no, I got to go"
-    COOKIE_SECRET: "Louie Louie, oh no, I got to go"
+    JWT_SECRET: "Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go"
+    COOKIE_SECRET: "Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go"
     GITHUB_FEEDBACK_URL: "https://api.github.com/repos/:user/:repo/issues"
     GITHUB_USER: "yourgithubuser"
     GITHUB_TOKEN: "yourgithubtoken"
