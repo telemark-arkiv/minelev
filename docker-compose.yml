@@ -1,3 +1,9 @@
+logserver:
+  image: mongo:3.2.1
+
+queueserver:
+  image: mongo:3.2.1
+
 webserver:
   image: telemark/minelev
   # build: .
@@ -27,7 +33,3 @@ webserver:
   links:
    - logserver
    - queueserver
-logserver:
-  image: mongo:3.2.1
-queueserver:
-  image: mongo:3.2.1
