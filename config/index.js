@@ -27,7 +27,6 @@ function ldapTlsSettings () {
 
 var config = {
   SERVER_PORT_WEB: SERVER_PORT_WEB,
-  SERVER_PORT_API: process.env.SERVER_PORT_API || 3000,
   DB_CONNECTION_LOG: process.env.DB_CONNECTION_LOG || 'mongodb://localhost/louie',
   DB_CONNECTION_QUEUE: process.env.DB_CONNECTION_QUEUE || 'mongodb://localhost/louie',
   BUDDY_API_URL: process.env.BUDDY_API_URL || 'http://localhost:' + SERVER_PORT_WEB + '/demo',

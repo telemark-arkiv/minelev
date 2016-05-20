@@ -29,11 +29,5 @@ webserver:
    - queueserver
 logserver:
   image: mongo:3.2.1
-  environment:
-    DB: louie
-    COLLECTION: logs
 queueserver:
   image: mongo:3.2.1
-  environment:
-    DB: louie
-    COLLECTION: queue
