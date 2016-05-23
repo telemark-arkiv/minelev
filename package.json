@@ -58,7 +58,7 @@
   "devDependencies": {
     "coveralls": "2.11.6",
     "standard": "7.0.1",
-    "tap": "5.4.4"
+    "tap": "5.7.2"
   },
   "dependencies": {
     "form-data": "git+https://github.com/telemark/form-data.git",
