@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "coveralls": "2.11.6",
-    "standard": "7.0.1",
+    "standard": "7.1.1",
     "tap": "5.7.2"
   },
   "dependencies": {
