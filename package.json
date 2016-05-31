@@ -69,7 +69,7 @@
     "handlebars": "4.0.5",
     "hapi": "13.4.1",
     "hapi-auth-cookie": "6.0.0",
-    "hapi-auth-jwt2": "7.0.0",
+    "hapi-auth-jwt2": "7.0.1",
     "hoek": "4.0.0",
     "inert": "4.0.0",
     "jsonwebtoken": "7.0.0",
