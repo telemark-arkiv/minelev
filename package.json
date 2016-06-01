@@ -70,7 +70,7 @@
     "hapi": "13.4.1",
     "hapi-auth-cookie": "6.0.0",
     "hapi-auth-jwt2": "7.0.1",
-    "hoek": "4.0.0",
+    "hoek": "4.0.1",
     "inert": "4.0.0",
     "jsonwebtoken": "7.0.0",
     "ldapauth-fork": "2.5.2",
