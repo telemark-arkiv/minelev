@@ -56,7 +56,7 @@
     "url": "http://github.com/telemark/minelev/issues"
   },
   "devDependencies": {
-    "coveralls": "2.11.6",
+    "coveralls": "2.11.10",
     "standard": "7.1.2",
     "tap": "6.1.1"
   },
