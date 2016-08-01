@@ -1,10 +1,24 @@
 logserver:
-  image: mongo:3.2.1
+  image: mongo:3.2.6
 
 queueserver:
-  image: mongo:3.2.1
+  image: mongo:3.2.6
 
-webserver:
+minelev_services_base:
+  image: telemark/tfk-seneca-base
+  container_name: minelev_services_base
+  env_file: skoleskyss.env
+  restart: always
+  net: container:minelev_webserver
+
+minelev_services_counter:
+  image: telemark/tfk-seneca-counter
+  container_name: minelev_services_counter
+  env_file: skoleskyss.env
+  restart: always
+  net: container:minelev_webserver
+
+minelev_webserver:
   image: telemark/minelev
   env_file: minelev.env
   ports:

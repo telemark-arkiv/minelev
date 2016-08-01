@@ -1,5 +1,7 @@
 'use strict'
 
+const Chairo = require('chairo')
+const Seneca = require('seneca')()
 const Hapi = require('hapi')
 const Hoek = require('hoek')
 const server = new Hapi.Server()
@@ -21,6 +23,21 @@ const goodOptions = {
     }, 'stdout']
   }
 }
+
+const plugins = [
+  {register: Chairo, options: {seneca: Seneca}}
+]
+
+function endIfError (error) {
+  if (error) {
+    console.error(error)
+    process.exit(1)
+  }
+}
+
+server.register(plugins, function (error) {
+  endIfError(error)
+})
 
 server.connection({
   port: config.SERVER_PORT_WEB
@@ -108,6 +125,12 @@ server.register([
     console.error('Failed to load a plugin:', err)
   }
 })
+
+const seneca = server.seneca
+
+seneca.use('mesh', {auto: true})
+
+seneca.log.info('hapi', server.info)
 
 function startServer () {
   server.start(function () {
