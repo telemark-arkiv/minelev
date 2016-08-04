@@ -7,14 +7,21 @@ queueserver:
 minelev_services_base:
   image: telemark/tfk-seneca-base
   container_name: minelev_services_base
-  env_file: skoleskyss.env
+  env_file: minelev.env
   restart: always
   net: container:minelev_webserver
 
 minelev_services_counter:
   image: telemark/tfk-seneca-counter
   container_name: minelev_services_counter
-  env_file: skoleskyss.env
+  env_file: minelev.env
+  restart: always
+  net: container:minelev_webserver
+
+minelev_services_queue:
+  image: telemark/tfk-seneca-queue
+  container_name: minelev_services_queue
+  env_file: minelev.env
   restart: always
   net: container:minelev_webserver
 

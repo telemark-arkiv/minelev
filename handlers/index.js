@@ -7,9 +7,7 @@ var getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates'
 var FormData = require('form-data')
 var config = require('../config')
 var dblog = mongojs(config.DB_CONNECTION_LOG)
-var dbqueue = mongojs(config.DB_CONNECTION_QUEUE)
 var logs = dblog.collection('logs')
-var queue = dbqueue.collection('queue')
 var pkg = require('../package.json')
 var prepareWarning = require('../lib/prepare-warning')
 var prepareWarningPreview = require('../lib/prepare-warning-preview')
@@ -299,18 +297,19 @@ function generateWarningPreview (request, reply) {
   })
 }
 
-function submitWarning (request, reply) {
-  var user = request.auth.credentials.data
+module.exports.submitWarning = (request, reply) => {
+  const user = request.auth.credentials.data
   var data = request.payload
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.cn
   var postData = prepareWarning(data)
 
-  queue.save(postData, function (error, doc) {
+  request.seneca.act({role: 'queue', cmd: 'add', data: postData}, (error, doc) => {
     if (error) {
       console.error(error)
     } else {
+      request.seneca.act({role: 'counter', cmd: 'add', key: 'minelev/queue'})
       postData.documentId = doc._id.toString()
       postData.documentStatus = [
         {
@@ -341,5 +340,3 @@ module.exports.doSearch = doSearch
 module.exports.writeWarning = writeWarning
 
 module.exports.generateWarningPreview = generateWarningPreview
-
-module.exports.submitWarning = submitWarning

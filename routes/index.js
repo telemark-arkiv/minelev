@@ -85,24 +85,6 @@ var routes = [
     }
   },
   {
-    method: 'get',
-    path: '/api/queue/next',
-    config: {
-      handler: api.getNextFromQueue,
-      description: 'Get next job from queue',
-      auth: 'jwt'
-    }
-  },
-  {
-    method: 'delete',
-    path: '/api/queue/{jobId}',
-    config: {
-      handler: api.deleteFromQueue,
-      description: 'Delete job from queue',
-      auth: 'jwt'
-    }
-  },
-  {
     method: 'post',
     path: '/api/logs/{documentId}',
     config: {
