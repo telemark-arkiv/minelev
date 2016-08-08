@@ -100,6 +100,7 @@ function showLogin (request, reply) {
   reply.view('login', viewOptions, {layout: 'layout-login'})
 }
 
+/*
 function doLogin (request, reply) {
   var jwt = require('jsonwebtoken')
   var payload = request.payload
@@ -146,8 +147,8 @@ function doLogin (request, reply) {
     }
   })
 }
+*/
 
-/*
 // For local testing
 function doLogin (request, reply) {
   var jwt = require('jsonwebtoken')
@@ -171,7 +172,6 @@ function doLogin (request, reply) {
 
   reply.redirect('/')
 }
-*/
 
 function doLogout (request, reply) {
   request.cookieAuth.clear()
@@ -247,6 +247,7 @@ function writeWarning (request, reply) {
         var student = payload[0]
         viewOptions.student = student
         viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
+        viewOptions.skjemaUtfyllingStart = new Date().getTime()
         reply.view('warning', viewOptions)
       }
       if (res.statusCode === 401) {
@@ -263,6 +264,7 @@ function generateWarningPreview (request, reply) {
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.cn
+  data.userAgent = request.headers['user-agent']
   var postData = prepareWarning(data)
   var previewData = prepareWarningPreview(postData)
   var template = getWarningTemplatesPath(postData.documentCategory)
@@ -305,6 +307,7 @@ module.exports.submitWarning = (request, reply) => {
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.cn
+  data.userAgent = request.headers['user-agent']
   var postData = prepareWarning(data)
 
   request.seneca.act({role: 'queue', cmd: 'add', data: postData}, (error, doc) => {

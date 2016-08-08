@@ -3,6 +3,7 @@
   <div class="mdl-cell mdl-cell--3-col"></div>
   <div id ="warningCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
     <form action="/warning/{{student.personalIdNumber}}" method="post" id="submitWarningForm">
+      <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
       <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
       <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
       <input type="hidden" name="studentLastName" value="{{student.lastName}}">
