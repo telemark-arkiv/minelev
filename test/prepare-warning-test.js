@@ -18,8 +18,10 @@ tap.test('It returns expected result from adferd', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Adferd prepared correct')
   test.done()
 })
@@ -30,8 +32,10 @@ tap.test('It returns expected result from adferd single', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Adferd single prepared correct')
   test.done()
 })
@@ -42,8 +46,10 @@ tap.test('It returns expected result from karakter', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Karakter prepared correct')
   test.done()
 })
@@ -54,8 +60,10 @@ tap.test('It returns expected result from karakter single', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Karakter single prepared correct')
   test.done()
 })
@@ -66,8 +74,10 @@ tap.test('It returns expected result from orden', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Orden prepared correct')
   test.done()
 })
@@ -78,8 +88,10 @@ tap.test('It returns expected result from orden single', function (test) {
   var result = prepareWarning(data)
   tap.ok(result.timeStamp, 'timeStamp exists')
   tap.ok(result.documentDate, 'documentDate exists')
+  tap.ok(result.skjemaUtfyllingStop, 'skjemaUtfyllingStop exists')
   delete result.timeStamp
   delete result.documentDate
+  delete result.skjemaUtfyllingStop
   tap.equal(JSON.stringify(result).trim(), JSON.stringify(expected).trim(), 'Orden single prepared correct')
   test.done()
 })
