@@ -11,6 +11,7 @@ var logs = dblog.collection('logs')
 var pkg = require('../package.json')
 var prepareWarning = require('../lib/prepare-warning')
 var prepareWarningPreview = require('../lib/prepare-warning-preview')
+const courseCategory = require('../lib/categories-courses')
 var order = require('../lib/categories-order')
 var behaviour = require('../lib/categories-behaviour')
 var warningTypes = require('../lib/categories-warnings')
@@ -229,7 +230,8 @@ function writeWarning (request, reply) {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     order: order,
-    behaviour: behaviour
+    behaviour: behaviour,
+    courseCategory: courseCategory
   }
 
   var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/students/'
