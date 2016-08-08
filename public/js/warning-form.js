@@ -56,7 +56,6 @@ function init () {
 
 function preselectFag () {
   var radios = document.querySelectorAll('.warning-type-selector')
-  var arsakCourse = document.getElementById('courseChkboxCourse')
   var courses = document.querySelectorAll('.chxBxfagInput')
   if (radios.length === 1) {
     radios[0].checked = true
@@ -65,7 +64,6 @@ function preselectFag () {
   if (courses.length === 1) {
     courses[0].checked = true
   }
-  arsakCourse.checked = true
 }
 
 function showMe (type) {
@@ -96,7 +94,7 @@ function validateWarning () {
   var warningTypes = document.querySelectorAll('.warning-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
-  var arsakCourse = document.getElementById('courseChkboxCourse')
+  var arsakCourse = document.querySelectorAll('.course-category-selector')
   var checkboxCount = 0
   var type = false
   var typeOK = false
@@ -121,6 +119,12 @@ function validateWarning () {
     }
   })
 
+  Array.prototype.forEach.call(arsakCourse, function(el) {
+    if (el.checked) {
+      reasonOK = true
+    }
+  })
+
   Array.prototype.forEach.call(checkBoxes, function(el) {
     if (el.checked) {
       if (type === 'atferd' && /behaviour/.test(el.id)) {
@@ -135,11 +139,7 @@ function validateWarning () {
     }
   })
 
-  if (type === 'fag' && arsakCourse.checked) {
-    reasonOK = true
-  }
-
-  if (type === 'fag' && checkboxCount > 1) {
+  if (type === 'fag' && checkboxCount > 0) {
     courseOK = true
   }
 
