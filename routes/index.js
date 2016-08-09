@@ -3,13 +3,21 @@
 var handlers = require('../handlers')
 var api = require('../handlers/api')
 
-var routes = [
+module.exports = [
   {
     method: 'GET',
     path: '/',
     config: {
       handler: handlers.getFrontpage,
       description: 'Show the frontpage'
+    }
+  },
+  {
+    method: 'GET',
+    path: '/class',
+    config: {
+      handler: handlers.showClasses,
+      description: 'Show the class'
     }
   },
   {
@@ -94,5 +102,3 @@ var routes = [
     }
   }
 ]
-
-module.exports = routes

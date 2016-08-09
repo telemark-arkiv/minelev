@@ -45,6 +45,10 @@ function getStatsCategory (request, reply) {
     })
 }
 
+module.exports.getStats = (request, reply) => {
+  reply.view('statistikk')
+}
+
 module.exports.getStatsSchools = getStatsSchools
 
 module.exports.getStatsTotal = getStatsTotal

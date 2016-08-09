@@ -2,7 +2,15 @@
 
 var stats = require('../handlers/stats')
 
-var routes = [
+module.exports = [
+  {
+    method: 'GET',
+    path: '/stats',
+    config: {
+      handler: stats.getStats,
+      description: 'Statistics for everything'
+    }
+  },
   {
     method: 'GET',
     path: '/stats/schools',
@@ -52,5 +60,3 @@ var routes = [
     }
   }
 ]
-
-module.exports = routes
