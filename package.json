@@ -74,7 +74,7 @@
     "hapi-auth-jwt2": "7.0.1",
     "hoek": "4.0.2",
     "inert": "4.0.1",
-    "jsonwebtoken": "7.1.7",
+    "jsonwebtoken": "7.1.8",
     "ldapauth-fork": "2.5.3",
     "mongojs": "2.3.0",
     "seneca": "2.1.0",
