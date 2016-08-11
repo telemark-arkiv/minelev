@@ -14,14 +14,6 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/class',
-    config: {
-      handler: handlers.showClasses,
-      description: 'Show the class'
-    }
-  },
-  {
-    method: 'GET',
     path: '/logs',
     config: {
       handler: handlers.getLogspage,

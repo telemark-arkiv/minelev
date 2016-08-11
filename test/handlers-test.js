@@ -3,11 +3,9 @@
 var tap = require('tap')
 var handlers = require('../handlers')
 
-tap.equal(Object.keys(handlers).length, 11, 'There are 11 different handlers')
+tap.equal(Object.keys(handlers).length, 10, 'There are 10 different handlers')
 
 tap.ok(handlers.getFrontpage, 'Handler has method getFrontpage')
-
-tap.ok(handlers.showClasses, 'Handler has method showClasses')
 
 tap.ok(handlers.getLogspage, 'Handler has method getLogspage')
 

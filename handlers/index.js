@@ -327,10 +327,6 @@ module.exports.submitWarning = (request, reply) => {
   })
 }
 
-module.exports.showClasses = (request, reply) => {
-  reply.view('klasseliste')
-}
-
 module.exports.getFrontpage = getFrontpage
 
 module.exports.getLogspage = getLogspage
