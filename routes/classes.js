@@ -10,5 +10,13 @@ module.exports = [
       handler: handlers.showClasses,
       description: 'Show the class'
     }
+  },
+  {
+    method: 'GET',
+    path: '/classes/{groupID}',
+    config: {
+      handler: handlers.listStudentsInClass,
+      description: 'List all students in class'
+    }
   }
 ]
