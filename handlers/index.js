@@ -270,6 +270,8 @@ function generateWarningPreview (request, reply) {
   var template = getWarningTemplatesPath(postData.documentCategory)
   var templaterForm = new FormData()
 
+  request.seneca.act({role: 'info', info: 'preview', data: previewData})
+
   Object.keys(previewData).forEach(function (key) {
     templaterForm.append(key, previewData[key])
   })
