@@ -4,8 +4,7 @@
 // For Active Directory:
 // searchFilter: '(sAMAccountName={{username}})'
 
-var path = require('path')
-
+const path = require('path')
 const SERVER_PORT_WEB = process.env.MINELEV_SERVER_PORT_WEB || 8000
 
 function ldapTlsSettings () {
@@ -24,10 +23,9 @@ function ldapTlsSettings () {
   return config
 }
 
-var config = {
+module.exports = {
   SERVER_PORT_WEB: SERVER_PORT_WEB,
   DB_CONNECTION_LOG: process.env.MINELEV_LOG_DB_URI || 'mongodb://localhost/louie',
-  DB_CONNECTION_QUEUE: process.env.MINELEV_QUEUE_DB_URI || 'mongodb://localhost/louie',
   BUDDY_API_URL: process.env.MINELEV_BUDDY_API_URL || 'http://localhost:' + SERVER_PORT_WEB + '/demo',
   CALLBACK_STATUS_URL: process.env.MINELEV_CALLBACK_STATUS_URL || 'https://api.buddy.com/status/',
   TEMPLATER_SERVICE_URL: process.env.MINELEV_TEMPLATER_SERVICE_URL || 'https://api.buddy.com/status/',
@@ -45,5 +43,3 @@ var config = {
     tlsOptions: ldapTlsSettings()
   }
 }
-
-module.exports = config

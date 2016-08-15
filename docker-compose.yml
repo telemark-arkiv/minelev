@@ -1,9 +1,6 @@
 logserver:
   image: mongo:3.2.6
 
-queueserver:
-  image: mongo:3.2.6
-
 minelev_services_base:
   image: telemark/tfk-seneca-base
   container_name: minelev_services_base
@@ -25,6 +22,13 @@ minelev_services_counter:
   restart: always
   net: container:minelev_webserver
 
+minelev_services_stats_dispatcher:
+  image: telemark/tfk-seneca-mesh-minelev-stats-dispatcher
+  container_name: minelev_stats_dispatcher
+  env_file: minelev.env
+  restart: always
+  net: container:minelev_webserver
+
 minelev_services_queue:
   image: telemark/tfk-seneca-queue
   container_name: minelev_services_queue
@@ -39,4 +43,3 @@ minelev_webserver:
     - "80:80"
   links:
    - logserver
-   - queueserver
