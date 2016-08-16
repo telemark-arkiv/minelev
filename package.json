@@ -81,7 +81,7 @@
     "seneca-balance-client": "0.5.0",
     "seneca-mesh": "0.8.0",
     "tfk-saksbehandling-elev-varsel-templates": "4.0.1",
-    "tfk-saksbehandling-schools-info": "2.0.1",
+    "tfk-saksbehandling-schools-info": "2.0.2",
     "vision": "4.0.1",
     "wreck": "9.0.0"
   }
