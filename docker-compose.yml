@@ -15,6 +15,13 @@ minelev_services_mail:
   restart: always
   net: container:minelev_webserver
 
+minelev_services_varsle_kontaktlarer:
+  image: telemark/tfk-seneca-mesh-minelev-varsle-kontaktlarer
+  container_name: minelev_services_varsle_kontaktlarer
+  env_file: minelev.env
+  restart: always
+  net: container:minelev_webserver
+
 minelev_services_counter:
   image: telemark/tfk-seneca-counter
   container_name: minelev_services_counter
