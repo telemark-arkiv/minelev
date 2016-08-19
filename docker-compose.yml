@@ -1,5 +1,5 @@
 logserver:
-  image: mongo:3.2.6
+  image: mongo:3.2.8
 
 minelev_services_base:
   image: telemark/tfk-seneca-base

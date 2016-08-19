@@ -12,7 +12,6 @@ module.exports.deleteFromQueue = (request, reply) => {
     if (error) {
       reply(error)
     } else {
-      request.seneca.act({role: 'counter', cmd: 'subtract', key: 'minelev/queue'})
       reply(data)
     }
   })

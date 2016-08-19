@@ -316,7 +316,6 @@ module.exports.submitWarning = (request, reply) => {
     if (error) {
       console.error(error)
     } else {
-      request.seneca.act({role: 'counter', cmd: 'add', key: 'minelev/queue'})
       postData.documentId = doc._id.toString()
       postData.documentStatus = [
         {
