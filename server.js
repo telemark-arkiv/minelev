@@ -24,6 +24,14 @@ const goodOptions = {
   }
 }
 
+const yarOptions = {
+  storeBlank: false,
+  cookieOptions: {
+    password: config.YAR_SECRET,
+    isSecure: false
+  }
+}
+
 const plugins = [
   {register: Chairo, options: {seneca: Seneca}}
 ]
@@ -104,6 +112,15 @@ server.register(require('hapi-auth-jwt2'), function (err) {
       validateFunc: validateAPI,            // validate function defined above
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
     })
+})
+
+server.register({
+  register: require('yar'),
+  options: yarOptions
+}, function (err) {
+  if (err) {
+    console.error('Failed to load a plugin:', err)
+  }
 })
 
 server.register({
