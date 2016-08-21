@@ -32,7 +32,7 @@ module.exports.getFrontpage = (request, reply) => {
   var mongoQuery = {'userId': userId}
 
   if (myContactClasses.length > 0) {
-    mongoQuery = {studentMainGroupName: myContactClasses}
+    mongoQuery = {studentMainGroupName: {'$in': myContactClasses}}
   }
   logs.find(mongoQuery).sort({timeStamp: -1}).limit(40, function (error, data) {
     if (error) {
