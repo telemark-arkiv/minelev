@@ -7,19 +7,22 @@ var wreckOptions = {
   json: true
 }
 
-function showFeedbackPage (request, reply) {
+module.exports.showFeedbackPage = (request, reply) => {
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses
   }
   reply.view('feedback', viewOptions)
 }
 
-function addFeedback (request, reply) {
+module.exports.addFeedback = (request, reply) => {
   var data = request.payload
   var url = config.GITHUB_FEEDBACK_URL
   var title = pkg.louie.systemName + ' - ' + pkg.version + ' - ' + new Date()
@@ -49,7 +52,3 @@ function addFeedback (request, reply) {
     }
   })
 }
-
-module.exports.showFeedbackPage = showFeedbackPage
-
-module.exports.addFeedback = addFeedback

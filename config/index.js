@@ -28,6 +28,7 @@ module.exports = {
   SERVER_PORT_WEB: SERVER_PORT_WEB,
   DB_CONNECTION_LOG: process.env.MINELEV_LOG_DB_URI || 'mongodb://localhost/louie',
   BUDDY_API_URL: process.env.MINELEV_BUDDY_API_URL || 'http://localhost:' + SERVER_PORT_WEB + '/demo',
+  BUDDY_JWT_KEY: process.env.MINELEV_BUDDY_JWT_KEY || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   CALLBACK_STATUS_URL: process.env.MINELEV_CALLBACK_STATUS_URL || 'https://api.buddy.com/status/',
   TEMPLATER_SERVICE_URL: process.env.MINELEV_TEMPLATER_SERVICE_URL || 'https://pdftemplater.service.t-fk.no',
   JWT_SECRET: process.env.MINELEV_JWT_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',

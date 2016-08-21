@@ -2,7 +2,6 @@
 
 var fs = require('fs')
 var mongojs = require('mongojs')
-var Wreck = require('wreck')
 var getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
 var FormData = require('form-data')
 var config = require('../config')
@@ -15,9 +14,6 @@ const courseCategory = require('../lib/categories-courses')
 var order = require('../lib/categories-order')
 var behaviour = require('../lib/categories-behaviour')
 var warningTypes = require('../lib/categories-warnings')
-var wreckOptions = {
-  json: true
-}
 
 function filterWarningTypes (contactTeacher) {
   var filteredList = []
@@ -29,8 +25,16 @@ function filterWarningTypes (contactTeacher) {
   return filteredList
 }
 
-function getFrontpage (request, reply) {
-  logs.find({'userId': request.auth.credentials.data.userId}).sort({timeStamp: -1}).limit(20, function (error, data) {
+module.exports.getFrontpage = (request, reply) => {
+  const yar = request.yar
+  const userId = request.auth.credentials.data.userId
+  const myContactClasses = yar.get('myContactClasses') || []
+  var mongoQuery = {'userId': userId}
+
+  if (myContactClasses.length > 0) {
+    mongoQuery = {studentMainGroupName: myContactClasses}
+  }
+  logs.find(mongoQuery).sort({timeStamp: -1}).limit(40, function (error, data) {
     if (error) {
       console.error(error)
     }
@@ -41,6 +45,7 @@ function getFrontpage (request, reply) {
       systemName: pkg.louie.systemName,
       githubUrl: pkg.repository.url,
       credentials: request.auth.credentials,
+      myContactClasses: myContactClasses,
       latestId: request.query.documentAdded,
       logs: data || []
     }
@@ -48,7 +53,9 @@ function getFrontpage (request, reply) {
   })
 }
 
-function getLogspage (request, reply) {
+module.exports.getLogspage = (request, reply) => {
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
   var query = {}
   if (request.query.studentId) {
     query.studentId = request.query.studentId
@@ -67,6 +74,7 @@ function getLogspage (request, reply) {
       systemName: pkg.louie.systemName,
       githubUrl: pkg.repository.url,
       credentials: request.auth.credentials,
+      myContactClasses: myContactClasses,
       logs: data
     }
     if (request.query.studentId) {
@@ -77,14 +85,17 @@ function getLogspage (request, reply) {
   })
 }
 
-function getHelppage (request, reply) {
-  var viewOptions = {
+module.exports.getHelppage = (request, reply) => {
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
+  const viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses
   }
   reply.view('help', viewOptions)
 }
@@ -101,10 +112,12 @@ function showLogin (request, reply) {
 }
 
 function doLogin (request, reply) {
+  const yar = request.yar
   var jwt = require('jsonwebtoken')
   var payload = request.payload
   var username = payload.username
   var password = payload.password
+  const userId = username
   var LdapAuth = require('ldapauth-fork')
   var auth = new LdapAuth(config.LDAP)
 
@@ -142,7 +155,18 @@ function doLogin (request, reply) {
           console.error(err)
         }
       })
-      reply.redirect('/')
+      request.seneca.act({role: 'buddy', list: 'contact-classes', userId: userId}, (error, payload) => {
+        var myContactClasses = []
+        if (error) {
+          reply(error)
+        } else {
+          if (Array.isArray(payload)) {
+            myContactClasses = payload
+          }
+          yar.set('myContactClasses', myContactClasses)
+          reply.redirect('/')
+        }
+      })
     }
   })
 }
@@ -150,9 +174,11 @@ function doLogin (request, reply) {
 /*
 // For local testing
 function doLogin (request, reply) {
+  const yar = request.yar
   var jwt = require('jsonwebtoken')
   var payload = request.payload
   var username = payload.username
+  const userId = username
   // var password = payload.password
   var user = {
     cn: username,
@@ -169,7 +195,18 @@ function doLogin (request, reply) {
     data: user
   })
 
-  reply.redirect('/')
+  request.seneca.act({role: 'buddy', list: 'contact-classes', userId: userId}, (error, payload) => {
+    var myContactClasses = []
+    if (error) {
+      reply(error)
+    } else {
+      if (Array.isArray(payload)) {
+        myContactClasses = payload
+      }
+      yar.set('myContactClasses', myContactClasses)
+      reply.redirect('/')
+    }
+  })
 }
 */
 
@@ -178,9 +215,13 @@ function doLogout (request, reply) {
   reply.redirect('/')
 }
 
-function doSearch (request, reply) {
-  var data = request.payload
-  var searchText = data.searchText
+module.exports.doSearch = (request, reply) => {
+  const yar = request.yar
+  const data = request.payload
+  const searchText = data.searchText
+  const userId = request.auth.credentials.data.userId
+  const myContactClasses = yar.get('myContactClasses') || []
+
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
@@ -188,40 +229,34 @@ function doSearch (request, reply) {
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
+    myContactClasses: myContactClasses,
     searchText: searchText
   }
 
-  var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/search/'
-
-  wreckOptions.headers = {
-    Authorization: request.auth.credentials.token
-  }
-
-  Wreck.get(searchUrl + searchText, wreckOptions, function (error, res, payload) {
+  request.seneca.act({role: 'buddy', search: 'students', userId: userId, query: searchText}, (error, payload) => {
     if (error) {
       reply(error)
     } else {
-      if (res.statusCode === 200) {
+      if (!payload.statusKode) {
         viewOptions.students = payload
         reply.view('search-results', viewOptions)
       }
-      if (res.statusCode === 404) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 404) {
         viewOptions.students = []
         reply.view('search-results', viewOptions)
       }
-      if (res.statusCode === 401) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 401) {
         reply.redirect('/logout')
       }
     }
   })
 }
 
-function writeWarning (request, reply) {
-  var studentID = request.params.studentID
+module.exports.writeWarning = (request, reply) => {
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
+  const studentUserName = request.params.studentID
+  const userId = request.auth.credentials.data.userId
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
@@ -229,28 +264,24 @@ function writeWarning (request, reply) {
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
+    myContactClasses: myContactClasses,
     order: order,
     behaviour: behaviour,
     courseCategory: courseCategory
   }
 
-  var searchUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/students/'
-  wreckOptions.headers = {
-    Authorization: request.auth.credentials.token
-  }
-
-  Wreck.get(searchUrl + studentID, wreckOptions, function (error, res, payload) {
+  request.seneca.act({role: 'buddy', get: 'student', userId: userId, studentUserName: studentUserName}, (error, payload) => {
     if (error) {
       reply(error)
     } else {
-      if (res.statusCode === 200) {
-        var student = payload[0]
+      if (!payload.statusCode) {
+        const student = payload[0]
         viewOptions.student = student
         viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
         viewOptions.skjemaUtfyllingStart = new Date().getTime()
         reply.view('warning', viewOptions)
       }
-      if (res.statusCode === 401) {
+      if (payload.statusCode === 401) {
         console.log(JSON.stringify(payload))
         reply.redirect('/logout')
       }
@@ -329,20 +360,10 @@ module.exports.submitWarning = (request, reply) => {
   })
 }
 
-module.exports.getFrontpage = getFrontpage
-
-module.exports.getLogspage = getLogspage
-
-module.exports.getHelppage = getHelppage
-
 module.exports.showLogin = showLogin
 
 module.exports.doLogin = doLogin
 
 module.exports.doLogout = doLogout
-
-module.exports.doSearch = doSearch
-
-module.exports.writeWarning = writeWarning
 
 module.exports.generateWarningPreview = generateWarningPreview

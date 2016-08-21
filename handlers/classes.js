@@ -1,45 +1,34 @@
 'use strict'
 
-const Wreck = require('wreck')
-const config = require('../config')
 const pkg = require('../package.json')
-var wreckOptions = {
-  json: true
-}
 
 module.exports.showClasses = (request, reply) => {
-  const classesUrl = config.BUDDY_API_URL + '/users/' + request.auth.credentials.data.userId + '/contactClasses'
-
+  const yar = request.yar
+  const userId = request.auth.credentials.data.userId
+  const myContactClasses = yar.get('myContactClasses') || []
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses
   }
 
-  wreckOptions.headers = {
-    Authorization: request.auth.credentials.token
-  }
-
-  Wreck.get(classesUrl, wreckOptions, function (error, res, payload) {
+  request.seneca.act({role: 'buddy', list: 'contact-classes', userId: userId}, (error, payload) => {
     if (error) {
       reply(error)
     } else {
-      if (res.statusCode === 200) {
+      if (!payload.statusKode) {
         viewOptions.classes = payload
         reply.view('klasseliste', viewOptions)
       }
-      if (res.statusCode === 404) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 404) {
         viewOptions.classes = []
         reply.view('klasseliste', viewOptions)
       }
-      if (res.statusCode === 401) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 401) {
         reply.redirect('/logout')
       }
     }
@@ -47,39 +36,32 @@ module.exports.showClasses = (request, reply) => {
 }
 
 module.exports.listStudentsInClass = (request, reply) => {
-  const groupID = request.params.groupID
-  const studentsUrl = config.BUDDY_API_URL + '/groups/' + groupID + '/students'
-
+  const yar = request.yar
+  const groupId = request.params.groupID
+  const myContactClasses = yar.get('myContactClasses') || []
   var viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
     systemName: pkg.louie.systemName,
     githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses
   }
 
-  wreckOptions.headers = {
-    Authorization: request.auth.credentials.token
-  }
-
-  Wreck.get(studentsUrl, wreckOptions, function (error, res, payload) {
+  request.seneca.act({role: 'buddy', list: 'students', groupId: groupId}, (error, payload) => {
     if (error) {
       reply(error)
     } else {
-      if (res.statusCode === 200) {
+      if (!payload.statusKode) {
         viewOptions.students = payload
         reply.view('klasse-elevliste', viewOptions)
       }
-      if (res.statusCode === 404) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 404) {
         viewOptions.students = []
         reply.view('klasse-elevliste', viewOptions)
       }
-      if (res.statusCode === 401) {
-        console.log(res.statusCode)
-        console.log(payload)
+      if (payload.statusKode === 401) {
         reply.redirect('/logout')
       }
     }

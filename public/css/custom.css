@@ -89,8 +89,8 @@ button[disabled=disabled], button:disabled {
 }
 
 .hide-me {
-    display: none;
-    visibility: hidden;
+    display: none !important;
+    visibility: hidden !important;
 }
 
 .center {
