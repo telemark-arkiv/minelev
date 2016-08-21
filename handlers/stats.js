@@ -1,9 +1,10 @@
 'use strict'
 
-var mongojs = require('mongojs')
-var config = require('../config')
-var dblog = mongojs(config.DB_CONNECTION_LOG)
-var logs = dblog.collection('logs')
+const mongojs = require('mongojs')
+const config = require('../config')
+const pkg = require('../package.json')
+const dblog = mongojs(config.DB_CONNECTION_LOG)
+const logs = dblog.collection('logs')
 
 function getStatsSchools (request, reply) {
   logs.aggregate({'$group': {'_id': '$schoolName', 'total': {'$sum': 1}}})
@@ -46,7 +47,18 @@ function getStatsCategory (request, reply) {
 }
 
 module.exports.getStats = (request, reply) => {
-  reply.view('statistikk')
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
+  const viewOptions = {
+    version: pkg.version,
+    versionName: pkg.louie.versionName,
+    versionVideoUrl: pkg.louie.versionVideoUrl,
+    systemName: pkg.louie.systemName,
+    githubUrl: pkg.repository.url,
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses
+  }
+  reply.view('statistikk', viewOptions)
 }
 
 module.exports.getStatsSchools = getStatsSchools

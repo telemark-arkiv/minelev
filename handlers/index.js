@@ -111,7 +111,7 @@ function showLogin (request, reply) {
   reply.view('login', viewOptions, {layout: 'layout-login'})
 }
 
-function doLogin (request, reply) {
+module.exports.doLogin = (request, reply) => {
   const yar = request.yar
   var jwt = require('jsonwebtoken')
   var payload = request.payload
@@ -173,7 +173,7 @@ function doLogin (request, reply) {
 
 /*
 // For local testing
-function doLogin (request, reply) {
+module.exports.doLogin = (request, reply) => {
   const yar = request.yar
   var jwt = require('jsonwebtoken')
   var payload = request.payload
@@ -361,8 +361,6 @@ module.exports.submitWarning = (request, reply) => {
 }
 
 module.exports.showLogin = showLogin
-
-module.exports.doLogin = doLogin
 
 module.exports.doLogout = doLogout
 
