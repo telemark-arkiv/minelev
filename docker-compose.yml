@@ -8,6 +8,13 @@ minelev_services_base:
   restart: always
   net: container:minelev_webserver
 
+minelev_services_buddy:
+  image: telemark/tfk-seneca-mesh-buddy
+  container_name: minelev_services_buddy
+  env_file: minelev.env
+  restart: always
+  net: container:minelev_webserver
+
 minelev_services_mail:
   image: telemark/tfk-seneca-mesh-mail-sendgrid
   container_name: minelev_services_mail
