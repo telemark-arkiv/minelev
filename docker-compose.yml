@@ -1,5 +1,7 @@
 logserver:
-  image: mongo:3.2.8
+  image: mongo:3.2.9
+queueserver:
+  image: mongo:3.2.9
 
 minelev_services_base:
   image: telemark/tfk-seneca-base
@@ -57,3 +59,4 @@ minelev_webserver:
     - "80:80"
   links:
    - logserver
+   - queueserver
