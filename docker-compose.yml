@@ -1,5 +1,6 @@
 logserver:
   image: mongo:3.2.9
+
 queueserver:
   image: mongo:3.2.9
 
