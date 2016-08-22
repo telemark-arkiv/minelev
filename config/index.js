@@ -31,6 +31,7 @@ module.exports = {
   BUDDY_JWT_KEY: process.env.MINELEV_BUDDY_JWT_KEY || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   CALLBACK_STATUS_URL: process.env.MINELEV_CALLBACK_STATUS_URL || 'https://api.buddy.com/status/',
   TEMPLATER_SERVICE_URL: process.env.MINELEV_TEMPLATER_SERVICE_URL || 'https://pdftemplater.service.t-fk.no',
+  LIVESTATS_URL: process.env.MINELEV_LIVESTATS_URL || 'https://tfk-livestats.firebaseio.com/minelev.json',
   JWT_SECRET: process.env.MINELEV_JWT_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   YAR_SECRET: process.env.MINELEV_YAR_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   COOKIE_SECRET: process.env.MINELEV_COOKIE_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
