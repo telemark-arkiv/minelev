@@ -5,6 +5,7 @@ const feedback = require('./routes/feedback')
 const stats = require('./routes/stats')
 const demo = require('./routes/demo')
 const classes = require('./routes/classes')
+const queue = require('./routes/queue')
 
 exports.register = function (server, options, next) {
   server.route(routes)
@@ -12,6 +13,7 @@ exports.register = function (server, options, next) {
   server.route(stats)
   server.route(demo)
   server.route(classes)
+  server.route(queue)
   next()
 }
 
