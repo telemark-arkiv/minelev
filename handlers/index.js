@@ -118,7 +118,6 @@ function showLogin (request, reply) {
   reply.view('login', viewOptions, {layout: 'layout-login'})
 }
 
-/*
 module.exports.doLogin = (request, reply) => {
   const yar = request.yar
   var jwt = require('jsonwebtoken')
@@ -178,8 +177,8 @@ module.exports.doLogin = (request, reply) => {
     }
   })
 }
-*/
 
+/*
 // For local testing
 module.exports.doLogin = (request, reply) => {
   const yar = request.yar
@@ -216,6 +215,7 @@ module.exports.doLogin = (request, reply) => {
     }
   })
 }
+*/
 
 function doLogout (request, reply) {
   request.cookieAuth.clear()
