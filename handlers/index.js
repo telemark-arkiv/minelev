@@ -32,7 +32,8 @@ module.exports.getFrontpage = (request, reply) => {
   var mongoQuery = {'userId': userId}
 
   if (myContactClasses.length > 0) {
-    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': myContactClasses}}]}
+    const classIds = myContactClasses.map(item => item.Id)
+    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
   }
   logs.find(mongoQuery).sort({timeStamp: -1}).limit(40, function (error, data) {
     if (error) {
@@ -54,16 +55,22 @@ module.exports.getFrontpage = (request, reply) => {
 }
 
 module.exports.getLogspage = (request, reply) => {
+  const userId = request.auth.credentials.data.userId
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  var query = {}
+  var mongoQuery = {}
   if (request.query.studentId) {
-    query.studentId = request.query.studentId
+    mongoQuery.studentId = request.query.studentId
   } else {
-    query.userId = request.auth.credentials.data.userId
+    if (myContactClasses.length > 0) {
+      const classIds = myContactClasses.map(item => item.Id)
+      mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
+    } else {
+      mongoQuery.userId = userId
+    }
   }
 
-  logs.find(query).sort({timeStamp: -1}, function (error, data) {
+  logs.find(mongoQuery).sort({timeStamp: -1}, function (error, data) {
     if (error) {
       console.error(error)
     }
@@ -111,6 +118,7 @@ function showLogin (request, reply) {
   reply.view('login', viewOptions, {layout: 'layout-login'})
 }
 
+/*
 module.exports.doLogin = (request, reply) => {
   const yar = request.yar
   var jwt = require('jsonwebtoken')
@@ -170,8 +178,8 @@ module.exports.doLogin = (request, reply) => {
     }
   })
 }
+*/
 
-/*
 // For local testing
 module.exports.doLogin = (request, reply) => {
   const yar = request.yar
@@ -208,7 +216,6 @@ module.exports.doLogin = (request, reply) => {
     }
   })
 }
-*/
 
 function doLogout (request, reply) {
   request.cookieAuth.clear()
