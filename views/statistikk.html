@@ -8,7 +8,7 @@
             <table class="mdl-data-table mdl-js-data-table">
                 <thead>
                 <tr>
-                    <th>Beskrivelse</th>
+                    <th class="mdl-data-table__cell--non-numeric">Beskrivelse</th>
                     <th>Antall</th>
                 </tr>
                 </thead>
@@ -90,6 +90,21 @@
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric">Vest-Telemark vidaregåande skule, avdeling Seljord</td>
                     <td>{{liveStats.antallSELVS}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">PC</td>
+                    <td>{{liveStats.desktop}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Mobil</td>
+                    <td>{{liveStats.tablet}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Nettbrett</td>
+                    <td>{{liveStats.phone}}</td>
                 </tr>
                 </tbody>
             </table>
