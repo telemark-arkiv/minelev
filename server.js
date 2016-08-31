@@ -4,6 +4,8 @@ const Chairo = require('chairo')
 const Seneca = require('seneca')()
 const Hapi = require('hapi')
 const Hoek = require('hoek')
+const hapiAuthCookie = require('hapi-auth-cookie')
+const hapiAuthJwt2 = require('hapi-auth-jwt2')
 const server = new Hapi.Server()
 const config = require('./config')
 const louieService = require('./index')
@@ -36,6 +38,17 @@ const plugins = [
   {register: Chairo, options: {seneca: Seneca}}
 ]
 
+const authPlugins = [
+  {
+    register: hapiAuthCookie,
+    options: {}
+  },
+  {
+    register: hapiAuthJwt2,
+    options: {}
+  }
+]
+
 function endIfError (error) {
   if (error) {
     console.error(error)
@@ -43,12 +56,33 @@ function endIfError (error) {
   }
 }
 
+server.connection({
+  port: config.SERVER_PORT_WEB
+})
+
 server.register(plugins, function (error) {
   endIfError(error)
 })
 
-server.connection({
-  port: config.SERVER_PORT_WEB
+server.register(authPlugins, function (error) {
+  endIfError(error)
+
+  server.auth.strategy('session', 'cookie', {
+    password: config.COOKIE_SECRET,
+    cookie: 'minelev-session',
+    validateFunc: validate,
+    redirectTo: '/login',
+    isSecure: false
+  })
+
+  server.auth.default('session')
+
+  server.auth.strategy('jwt', 'jwt', { key: config.JWT_SECRET,          // Never Share your secret key
+      validateFunc: validateAPI,            // validate function defined above
+      verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
+  })
+
+  registerRoutes()
 })
 
 server.register(require('vision'), function (err) {
@@ -86,34 +120,6 @@ server.register(require('inert'), function (err) {
   })
 })
 
-server.register(require('hapi-auth-cookie'), function (err) {
-  if (err) {
-    console.error('Failed to load a plugin: ', err)
-  }
-
-  server.auth.strategy('session', 'cookie', {
-    password: config.COOKIE_SECRET,
-    cookie: 'minelev-session',
-    validateFunc: validate,
-    redirectTo: '/login',
-    isSecure: false
-  })
-
-  server.auth.default('session')
-})
-
-server.register(require('hapi-auth-jwt2'), function (err) {
-  if (err) {
-    console.log(err)
-  }
-
-  server.auth.strategy('jwt', 'jwt',
-    { key: config.JWT_SECRET,          // Never Share your secret key
-      validateFunc: validateAPI,            // validate function defined above
-      verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
-    })
-})
-
 server.register({
   register: require('yar'),
   options: yarOptions
@@ -132,16 +138,18 @@ server.register({
   }
 })
 
-server.register([
-  {
-    register: louieService,
-    options: {}
-  }
-], function (err) {
-  if (err) {
-    console.error('Failed to load a plugin:', err)
-  }
-})
+function registerRoutes () {
+  server.register([
+    {
+      register: louieService,
+      options: {}
+    }
+  ], function (err) {
+    if (err) {
+      console.error('Failed to load a plugin:', err)
+    }
+  })
+}
 
 const seneca = server.seneca
 
