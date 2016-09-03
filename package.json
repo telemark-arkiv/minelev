@@ -1,6 +1,6 @@
 {
   "name": "minelev",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "description": "Admin interface for teachers",
   "license": "MIT",
   "author": {
@@ -30,6 +30,7 @@
     "coverage": "tap test/*.js --coverage",
     "coveralls": "tap --cov --coverage-report=lcov test/*.js && cat coverage/lcov.info | coveralls",
     "setup": "npm install && node setup.js",
+    "standard-fix": "standard --fix",
     "generate-test-token": "node utils/generate-test-token.js"
   },
   "keywords": [
