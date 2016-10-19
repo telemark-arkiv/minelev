@@ -4,8 +4,8 @@
 #
 ###########################################################
 
-# Setting the base to nodejs 4.6.0
-FROM mhart/alpine-node:4.6.0
+# Setting the base to nodejs 4.6.1
+FROM mhart/alpine-node:4.6.1
 
 # Maintainer
 MAINTAINER Geir Gåsodden
@@ -34,4 +34,4 @@ ENV SERVER_PORT 3000
 EXPOSE 3000
 
 # Startup
-ENTRYPOINT node standalone.js
+ENTRYPOINT node --max-old-space-size=4096 standalone.js
