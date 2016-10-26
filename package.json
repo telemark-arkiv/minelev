@@ -78,7 +78,7 @@
     "jsonwebtoken": "7.1.9",
     "ldapauth-fork": "2.5.3",
     "mongojs": "2.3.0",
-    "seneca": "3.2.1",
+    "seneca": "3.2.2",
     "seneca-balance-client": "0.6.0",
     "seneca-mesh": "0.9.0",
     "tfk-saksbehandling-elev-varsel-templates": "5.0.2",
