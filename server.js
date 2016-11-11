@@ -83,7 +83,6 @@ server.register(authPlugins, function (error) {
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
   })
 
-
   server.seneca.use('mesh', {auto: true})
 
   server.seneca.use(hub, {tag: 'seneca-hub'})
