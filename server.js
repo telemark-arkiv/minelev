@@ -11,6 +11,7 @@ const config = require('./config')
 const louieService = require('./index')
 const validate = require('./lib/validateJWT')
 const validateAPI = require('./lib/validateAPI')
+const hub = require('./lib/seneca-hub')
 const goodOptions = {
   ops: {
     interval: 900000
@@ -82,6 +83,13 @@ server.register(authPlugins, function (error) {
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
   })
 
+
+  server.seneca.use('mesh', {auto: true})
+
+  server.seneca.use(hub, {tag: 'seneca-hub'})
+
+  server.seneca.log.info('hapi', server.info)
+
   registerRoutes()
 })
 
@@ -150,12 +158,6 @@ function registerRoutes () {
     }
   })
 }
-
-const seneca = server.seneca
-
-seneca.use('mesh', {auto: true})
-
-seneca.log.info('hapi', server.info)
 
 function startServer () {
   server.start(function () {
