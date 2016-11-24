@@ -78,9 +78,10 @@ server.register(authPlugins, function (error) {
 
   server.auth.default('session')
 
-  server.auth.strategy('jwt', 'jwt', { key: config.JWT_SECRET,          // Never Share your secret key
-      validateFunc: validateAPI,            // validate function defined above
-      verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
+  server.auth.strategy('jwt', 'jwt', {
+    key: config.JWT_SECRET,          // Never Share your secret key
+    validateFunc: validateAPI,            // validate function defined above
+    verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
   })
 
   server.seneca.use('mesh', {auto: true})
