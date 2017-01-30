@@ -148,7 +148,7 @@ module.exports.doLogin = (request, reply) => {
         issuer: 'https://auth.t-fk.no'
       }
       var data = {
-        cn: user.displayName,
+        cn: user.displayName || user.cn,
         userId: user.sAMAccountName || user.uid || ''
       }
       var token = jwt.sign(data, config.JWT_SECRET, tokenOptions)
