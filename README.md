@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/telemark/minelev.svg?branch=master)](https://travis-ci.org/telemark/minelev)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 # minelev
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/telemark/minelev.svg)](https://greenkeeper.io/)
 Administrasjonsgrensesnitt for lærere i den videregående skolen.
 
 Versjon 1.0.0 ble lansert 29. februar 2016.
