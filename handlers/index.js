@@ -4,6 +4,7 @@ var fs = require('fs')
 var mongojs = require('mongojs')
 var getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
 var FormData = require('form-data')
+const logger = require('../lib/logger')
 var config = require('../config')
 var dblog = mongojs(config.DB_CONNECTION_LOG)
 var logs = dblog.collection('logs')
@@ -16,7 +17,7 @@ var behaviour = require('../lib/categories-behaviour')
 var warningTypes = require('../lib/categories-warnings')
 
 function filterWarningTypes (contactTeacher) {
-  var filteredList = []
+  let filteredList = []
   warningTypes.forEach(function (type) {
     if (type.id === 'fag' || contactTeacher) {
       filteredList.push(type)
@@ -37,9 +38,9 @@ module.exports.getFrontpage = (request, reply) => {
   }
   logs.find(mongoQuery).sort({timeStamp: -1}).limit(40, function (error, data) {
     if (error) {
-      console.error(error)
+      logger(['getFrontpage', 'error', JSON.stringify(error)])
     }
-    var viewOptions = {
+    const viewOptions = {
       version: pkg.version,
       versionName: pkg.louie.versionName,
       versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -72,9 +73,9 @@ module.exports.getLogspage = (request, reply) => {
 
   logs.find(mongoQuery).sort({timeStamp: -1}, function (error, data) {
     if (error) {
-      console.error(error)
+      logger(['getLogspage', 'error', JSON.stringify(error)])
     }
-    var viewOptions = {
+    const viewOptions = {
       version: pkg.version,
       versionName: pkg.louie.versionName,
       versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -130,7 +131,7 @@ module.exports.doLogin = (request, reply) => {
 
   auth.authenticate(username, password, function (err, user) {
     if (err) {
-      console.error(JSON.stringify(err))
+      logger(['doLogin', 'error', JSON.stringify(err)])
       if (err.name || /no such user/.test(err)) {
         var viewOptions = {
           version: pkg.version,
@@ -165,6 +166,7 @@ module.exports.doLogin = (request, reply) => {
       request.seneca.act({role: 'buddy', list: 'contact-classes', userId: userId}, (error, payload) => {
         var myContactClasses = []
         if (error) {
+          logger('doLogin', 'buddy', 'contact-classes', 'error', JSON.stringify(error))
           reply(error)
         } else {
           if (Array.isArray(payload)) {
@@ -242,6 +244,7 @@ module.exports.doSearch = (request, reply) => {
 
   request.seneca.act({role: 'buddy', search: 'students', userId: userId, query: searchText}, (error, payload) => {
     if (error) {
+      logger(['doSearch', 'buddy', 'students', 'error', JSON.stringify(error)])
       reply(error)
     } else {
       if (!payload.statusKode) {
@@ -279,6 +282,7 @@ module.exports.writeWarning = (request, reply) => {
 
   request.seneca.act({role: 'buddy', get: 'student', userId: userId, studentUserName: studentUserName}, (error, payload) => {
     if (error) {
+      logger(['writeWarning', 'buddy', 'student', 'error', userId, studentUserName, JSON.stringify(error)])
       reply(error)
     } else {
       if (!payload.statusCode) {
@@ -318,6 +322,7 @@ function generateWarningPreview (request, reply) {
 
   templaterForm.submit(config.TEMPLATER_SERVICE_URL, function (error, docx) {
     if (error) {
+      logger(['generateWarningPreview', 'error', JSON.stringify(error)])
       reply(error)
     } else {
       var chunks = []
@@ -352,7 +357,7 @@ module.exports.submitWarning = (request, reply) => {
 
   request.seneca.act({role: 'queue', cmd: 'add', data: postData}, (error, doc) => {
     if (error) {
-      console.error(error)
+      logger(['submitWarning', 'queue', 'add', 'error', JSON.stringify(error)])
     } else {
       postData.documentId = doc._id.toString()
       postData.documentStatus = [

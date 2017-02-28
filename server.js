@@ -1,7 +1,9 @@
 'use strict'
 
 const Chairo = require('chairo')
-const Seneca = require('seneca')()
+const legacyLogger = require('seneca-legacy-logger')
+const senecaOptions = {internal: {logger: legacyLogger}}
+const Seneca = require('seneca')(senecaOptions)
 const Hapi = require('hapi')
 const Hoek = require('hoek')
 const hapiAuthCookie = require('hapi-auth-cookie')
