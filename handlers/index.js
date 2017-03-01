@@ -166,7 +166,7 @@ module.exports.doLogin = (request, reply) => {
       request.seneca.act({role: 'buddy', list: 'contact-classes', userId: userId}, (error, payload) => {
         var myContactClasses = []
         if (error) {
-          logger('doLogin', 'buddy', 'contact-classes', 'error', JSON.stringify(error))
+          logger('doLogin', 'buddy', 'contact-classes', 'error', error)
           reply(error)
         } else {
           if (Array.isArray(payload)) {
@@ -244,7 +244,7 @@ module.exports.doSearch = (request, reply) => {
 
   request.seneca.act({role: 'buddy', search: 'students', userId: userId, query: searchText}, (error, payload) => {
     if (error) {
-      logger(['doSearch', 'buddy', 'students', 'error', JSON.stringify(error)])
+      logger(['doSearch', 'buddy', 'students', 'error', error])
       reply(error)
     } else {
       if (!payload.statusKode) {
@@ -282,7 +282,7 @@ module.exports.writeWarning = (request, reply) => {
 
   request.seneca.act({role: 'buddy', get: 'student', userId: userId, studentUserName: studentUserName}, (error, payload) => {
     if (error) {
-      logger(['writeWarning', 'buddy', 'student', 'error', userId, studentUserName, JSON.stringify(error)])
+      logger(['writeWarning', 'buddy', 'student', 'error', userId, studentUserName, error])
       reply(error)
     } else {
       if (!payload.statusCode) {
@@ -357,7 +357,7 @@ module.exports.submitWarning = (request, reply) => {
 
   request.seneca.act({role: 'queue', cmd: 'add', data: postData}, (error, doc) => {
     if (error) {
-      logger(['submitWarning', 'queue', 'add', 'error', JSON.stringify(error)])
+      logger(['submitWarning', 'queue', 'add', 'error', error])
     } else {
       postData.documentId = doc._id.toString()
       postData.documentStatus = [
