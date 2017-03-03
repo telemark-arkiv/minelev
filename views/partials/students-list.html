@@ -12,18 +12,18 @@
         {{#each students}}
         <tr>
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}}" class="mdl-color-text--black">
+                <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
                     <i class="material-icons">list</i>
                 </a>
             </td>
             <td class="mdl-data-table__cell--non-numeric">{{fullName}}</td>
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/classes/{{mainGroupName}}" title="Skriv nytt varsel til {{fullName}}" class="mdl-color-text--black">
+                <a href="/classes/{{mainGroupName}}" title="Skriv nytt varsel til {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
                     {{showClassNameFromId mainGroupName}}
                 </a>
             </td>
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/warning/{{userName}}" title="Skriv nytt varsel til {{fullName}}" class="mdl-color-text--black">
+                <a href="/warning/{{userName}}" title="Skriv nytt varsel til {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
                     <i class="material-icons">note_add</i>
                 </a>
             </td>
