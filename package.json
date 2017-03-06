@@ -1,8 +1,9 @@
 {
   "name": "minelev",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "description": "Admin interface for teachers",
   "license": "MIT",
+  "private": true,
   "author": {
     "name": "Geir Gåsodden",
     "email": "geir.gasodden@pythonia.no",
