@@ -77,7 +77,7 @@
     "hoek": "4.1.0",
     "inert": "4.1.0",
     "jsonwebtoken": "7.3.0",
-    "ldapauth-fork": "3.0.0",
+    "ldapauth-fork": "3.0.1",
     "mongojs": "2.4.0",
     "seneca": "3.2.2",
     "seneca-balance-client": "0.6.0",
