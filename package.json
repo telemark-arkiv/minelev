@@ -86,7 +86,7 @@
     "tfk-saksbehandling-elev-varsel-templates": "5.0.14",
     "tfk-saksbehandling-schools-info": "2.0.11",
     "vision": "4.1.1",
-    "wreck": "10.0.0",
+    "wreck": "11.0.0",
     "yar": "8.1.2"
   }
 }
