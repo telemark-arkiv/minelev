@@ -61,7 +61,7 @@
     "coveralls": "2.13.1",
     "nsp": "2.6.3",
     "standard": "10.0.0",
-    "tap": "10.3.2"
+    "tap": "10.3.4"
   },
   "dependencies": {
     "chairo": "3.0.0",
