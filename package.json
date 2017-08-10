@@ -79,7 +79,7 @@
     "jsonwebtoken": "7.4.2",
     "ldapauth-fork": "4.0.2",
     "mongojs": "2.4.0",
-    "seneca": "3.2.2",
+    "seneca": "3.4.2",
     "seneca-balance-client": "0.6.1",
     "seneca-legacy-logger": "0.1.2",
     "seneca-mesh": "0.10.0",
