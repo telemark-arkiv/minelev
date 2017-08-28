@@ -1,6 +1,6 @@
 {
   "name": "minelev",
-  "version": "4.2.30",
+  "version": "4.2.31",
   "description": "Admin interface for teachers",
   "license": "MIT",
   "private": true,
@@ -60,7 +60,7 @@
   "devDependencies": {
     "coveralls": "2.13.1",
     "nsp": "2.7.0",
-    "standard": "10.0.3",
+    "standard": "10.0.0",
     "tap": "10.3.2"
   },
   "dependencies": {
